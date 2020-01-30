@@ -26,14 +26,14 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.run">
+  <component name="RunManager" selected="Python.test">
     <configuration name="run" type="PythonConfigurationType" factoryName="Python">
       <module name="pin_gen_API" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="FLASK_APP" value="run.pu" />
+        <env name="FLASK_APP" value="run.py" />
         <env name="FLASK_DEBUG" value="1" />
       </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
@@ -100,34 +100,38 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="171" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580403601660">
+    <state x="171" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580409245008">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
-    <state x="171" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/47.24.1319.744@47.24.1319.744" timestamp="1580403601660" />
-    <state x="449" y="147" key="EnvironmentVariablesDialog" timestamp="1580403595619">
+    <state x="171" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/47.24.1319.744@47.24.1319.744" timestamp="1580409245008" />
+    <state x="444" y="132" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580414026159">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
-    <state x="449" y="147" key="EnvironmentVariablesDialog/47.24.1319.744@47.24.1319.744" timestamp="1580403595619" />
+    <state x="444" y="132" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/47.24.1319.744@47.24.1319.744" timestamp="1580414026158" />
+    <state x="449" y="147" key="EnvironmentVariablesDialog" timestamp="1580409240574">
+      <screen x="47" y="24" width="1319" height="744" />
+    </state>
+    <state x="449" y="147" key="EnvironmentVariablesDialog/47.24.1319.744@47.24.1319.744" timestamp="1580409240574" />
     <state x="494" y="141" key="FileChooserDialogImpl" timestamp="1580404161841">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
     <state x="494" y="141" key="FileChooserDialogImpl/47.24.1319.744@47.24.1319.744" timestamp="1580404161841" />
-    <state width="1296" height="224" key="GridCell.Tab.0.bottom" timestamp="1580403876308">
+    <state width="1296" height="224" key="GridCell.Tab.0.bottom" timestamp="1580415777405">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
-    <state width="1296" height="224" key="GridCell.Tab.0.bottom/47.24.1319.744@47.24.1319.744" timestamp="1580403876308" />
-    <state width="1296" height="224" key="GridCell.Tab.0.center" timestamp="1580403876308">
+    <state width="1296" height="224" key="GridCell.Tab.0.bottom/47.24.1319.744@47.24.1319.744" timestamp="1580415777405" />
+    <state width="1296" height="224" key="GridCell.Tab.0.center" timestamp="1580415777404">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
-    <state width="1296" height="224" key="GridCell.Tab.0.center/47.24.1319.744@47.24.1319.744" timestamp="1580403876308" />
-    <state width="1296" height="224" key="GridCell.Tab.0.left" timestamp="1580403876307">
+    <state width="1296" height="224" key="GridCell.Tab.0.center/47.24.1319.744@47.24.1319.744" timestamp="1580415777404" />
+    <state width="1296" height="224" key="GridCell.Tab.0.left" timestamp="1580415777403">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
-    <state width="1296" height="224" key="GridCell.Tab.0.left/47.24.1319.744@47.24.1319.744" timestamp="1580403876307" />
-    <state width="1296" height="224" key="GridCell.Tab.0.right" timestamp="1580403876308">
+    <state width="1296" height="224" key="GridCell.Tab.0.left/47.24.1319.744@47.24.1319.744" timestamp="1580415777403" />
+    <state width="1296" height="224" key="GridCell.Tab.0.right" timestamp="1580415777405">
       <screen x="47" y="24" width="1319" height="744" />
     </state>
-    <state width="1296" height="224" key="GridCell.Tab.0.right/47.24.1319.744@47.24.1319.744" timestamp="1580403876308" />
+    <state width="1296" height="224" key="GridCell.Tab.0.right/47.24.1319.744@47.24.1319.744" timestamp="1580415777405" />
     <state x="200" y="24" key="SettingsEditor" timestamp="1580408242423">
       <screen x="47" y="24" width="1319" height="744" />
     </state>

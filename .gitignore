@@ -62,3 +62,4 @@ venv.bak/
 app.db
 test.py
 migrations
+logs
