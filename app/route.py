@@ -24,16 +24,20 @@ def index():
     random_digit function is created with random function.
     :return: pin, serial
     """
-    # generating random pin and s_n
-    pin = random_digits(15)
-    s_n = random.randrange(1000,9999)
-    pin1 = Register.query.filter_by(pin=str(pin)).all()
-    s_n1 = Register.query.filter_by(s_n=int(s_n)).all()
-
-    # implementing a recursive function
-    if pin1 or s_n1:
+    # implemnting while loop to ensure that the random generated pin doesn't already exist in the database
+    counter = 1
+    while counter >= 1:
         pin = random_digits(15)
-        s_n = random.randrange(1000, 9999)
+        s_n = random.randrange(1000,9999)
+        pin1 = Register.query.filter_by(pin=str(pin)).all()
+        s_n1 = Register.query.filter_by(s_n=int(s_n)).all()
+        
+        if pin1 or s_n1:
+            print('again')
+            counter = counter + 1
+        else:
+            print(pin, s_n)
+            break
 
     save = Register(s_n=int(s_n), pin=str(pin))
     db.session.add(save)
