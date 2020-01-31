@@ -35,9 +35,9 @@ def index():
         pin = random_digits(15)
         s_n = random.randrange(1000, 9999)
 
-    # save = Register(s_n=int(s_n), pin=str(pin))
-    # db.session.add(save)
-    # db.session.commit()
+    save = Register(s_n=int(s_n), pin=str(pin))
+    db.session.add(save)
+    db.session.commit()
     serial_number = s_n
     pin1 = pin
     return jsonify({'serial number': serial_number, 'PIN': pin1})
