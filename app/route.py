@@ -25,26 +25,24 @@ def index():
     :return: pin, serial
     """
     # generating random pin and s_n
-    pin1 = random_digits(15)
-    print(pin1)
-    s_n1 = random.randrange(1000,9999)
-    print(s_n1)
-    pin_db = Pin.query.filter_by(pin=str(pin1)).all()
-    s_n_db = Pin.query.filter_by(s_n=int(s_n1)).all()
+    pin = random_digits(15)
+    s_n = random.randrange(1000,9999)
+    pin1 = Pin.query.filter_by(pin=str(pin)).all()
+    s_n1 = Pin.query.filter_by(s_n=int(s_n)).all()
 
     # implementing a recursive function
-    if pin_db or s_n_db:
-        pin1 = random_digits(15)
-        s_n1 = random.randrange(10, 100)
+    if pin1 or s_n1:
+        pin = random_digits(15)
+        s_n = random.randrange(1000, 9999)
 
-    save = Pin(s_n=int(s_n1), pin=str(pin1))
+    save = Pin(s_n=int(s_n), pin=str(pin))
     db.session.add(save)
     db.session.commit()
-    serial_number = s_n1
-    pin = pin1
+    serial_number = s_n
+    pin = pin
     return jsonify({'serial number': serial_number, 'PIN': pin})
 
-
+@app.route('/<string:pin>', methods=['GET'])
 @app.route('/pin/<string:pin>', methods=['GET'])
 def check_s_n(pin):
     """
