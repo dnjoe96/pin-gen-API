@@ -1,1 +1,1 @@
-web:flask db upgrade; gunicorn pin-gen:app
+web:flask db upgrade; gunicorn pinGen:app
