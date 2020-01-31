@@ -1,6 +1,6 @@
 from app import app, db
 from flask import jsonify
-from app.models import Pin
+from app.models import Register
 import random
 
 
@@ -27,20 +27,20 @@ def index():
     # generating random pin and s_n
     pin = random_digits(15)
     s_n = random.randrange(1000,9999)
-    pin1 = Pin.query.filter_by(pin=str(pin)).all()
-    s_n1 = Pin.query.filter_by(s_n=int(s_n)).all()
+    pin1 = Register.query.filter_by(pin=str(pin)).all()
+    s_n1 = Register.query.filter_by(s_n=int(s_n)).all()
 
     # implementing a recursive function
     if pin1 or s_n1:
         pin = random_digits(15)
         s_n = random.randrange(1000, 9999)
 
-    save = Pin(s_n=int(s_n), pin=str(pin))
+    save = Register(s_n=int(s_n), pin=str(pin))
     db.session.add(save)
     db.session.commit()
     serial_number = s_n
-    pin = pin
-    return jsonify({'serial number': serial_number, 'PIN': pin})
+    pin1 = pin
+    return jsonify({'serial number': serial_number, 'PIN': pin1})
 
 @app.route('/<string:pin>', methods=['GET'])
 @app.route('/pin/<string:pin>', methods=['GET'])
@@ -49,7 +49,7 @@ def check_s_n(pin):
     This endpoint verifies that the pin entered matches with what is in the database.
     if it exists, return 'valid' else, returns 'Invalid
     """
-    pin = Pin.query.filter_by(pin=pin).all()
+    pin = Register.query.filter_by(pin=pin).all()
     if pin:
         return jsonify({'message': 'Valid PIN'})
     return jsonify({'message': 'Invalid PIN !!!'})
@@ -61,7 +61,7 @@ def check_pin(s_n):
     This endpoint verifies that the pin entered matches with what is in the database.
     if it exists, return 'valid' else, returns 'Invalid
     """
-    s_n = Pin.guery.filter_by(s_n=s_n).all()
+    s_n = Register.query.filter_by(s_n=s_n).all()
     if s_n:
         return jsonify({'message': 'Valid Serial No'})
     return jsonify({'message': 'Invalid serial No !!!'})

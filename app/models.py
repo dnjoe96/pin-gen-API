@@ -2,8 +2,8 @@ from app import db
 from datetime import datetime
 
 
-class Pin(db.Model):
-    __tablename__ = 'Pin'
+class Register(db.Model):
+    __tablename__ = 'register'
 
     id = db.Column(db.Integer, primary_key=True)
     s_n = db.Column(db.Integer, unique=True, nullable=False)
