@@ -63,3 +63,4 @@ app.db
 test.py
 migrations
 logs
+.vscode

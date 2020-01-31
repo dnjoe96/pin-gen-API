@@ -1,7 +1,7 @@
 import os
 
-
 basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 # creating a configuration class
 class Config(object):

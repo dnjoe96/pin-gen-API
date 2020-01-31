@@ -1,8 +1,7 @@
 from logging.handlers import RotatingFileHandler
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate  # this is used to allow for future expansion oof the database
+from flask_migrate import Migrate
 from config import Config
 import os
 import logging
