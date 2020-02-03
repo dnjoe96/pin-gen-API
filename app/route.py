@@ -32,7 +32,7 @@ def index():
     save = Register(pin=str(pin))
     db.session.add(save)
     db.session.commit()
-    serial_number = Register.query.filter_by(pin=pin).first()
+    serial_number = Register.query.filter_by(pin=str(pin)).first()
     pin1 = pin
     return jsonify({'serial number': twelve_digit_serial_no(serial_number.s_n), 'PIN': pin1})
 
