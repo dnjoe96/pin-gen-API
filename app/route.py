@@ -4,7 +4,6 @@ from app.models import Register, random_digits, twelve_digit_serial_no, database
 
 
 @app.route('/', methods=['GET'])
-@app.route('/pin', methods=['GET'])
 def index():
     """
     This is the end point for a resource that generates random 15digit pin and serial number when the
@@ -37,7 +36,7 @@ def index():
     return jsonify({'serial number': twelve_digit_serial_no(serial_number.s_n), 'PIN': pin1})
 
 
-@app.route('/check/<string:serial_no>', methods=['GET'])
+@app.route('/<string:serial_no>', methods=['GET'])
 def check_pin(serial_no):
     """
     This endpoint verifies that the pin entered matches with what is in the database.
