@@ -37,7 +37,7 @@ def index():
     return jsonify({'serial number': twelve_digit_serial_no(serial_number.s_n), 'PIN': pin1})
 
 
-@app.route('/<string:serial_no>', methods=['GET'])
+@app.route('/check/<string:serial_no>', methods=['GET'])
 def check_pin(serial_no):
     """
     This endpoint verifies that the pin entered matches with what is in the database.
