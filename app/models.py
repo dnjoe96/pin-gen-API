@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+import random
 
 
 class Register(db.Model):
@@ -31,5 +32,7 @@ def twelve_digit_serial_no(id):
 
 
 def database_serial_no(twelve_digit_id):
-    db_id = twelve_digit_id - 10**11
+    a = int(twelve_digit_id)
+    b = 10**11
+    db_id = a - b
     return db_id
