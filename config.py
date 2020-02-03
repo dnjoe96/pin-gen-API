@@ -13,3 +13,5 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+
+    MONGO_URI = os.environ.get('MONGO_URI')

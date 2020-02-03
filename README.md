@@ -11,7 +11,7 @@ Generates a unique PIN and Serial Number. and returns it to the client in JSON f
 to validate serial number
 this endpoints checks if the Serial No is valid or not, returnig response and the associated PIN in JSON
 
-- `pin-gen-api.herokuapp.com/check/<serial no>`
+- `pin-gen-api.herokuapp.com/<serial no>`
 
 
 

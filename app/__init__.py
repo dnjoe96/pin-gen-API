@@ -5,11 +5,13 @@ from flask_migrate import Migrate
 from config import Config
 import os
 import logging
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+mongo = PyMongo(app)
 
 
 if app.config['LOG_TO_STDOUT']:
