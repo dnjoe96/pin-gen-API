@@ -1,25 +1,17 @@
-Simple API to generate and verify 15-digit pin.
+Simple API to generate and verify 15-digit pin and 12-digit Serial Number
 
 ## API end points
 API url: ``pin-gen-api.herokuapp.com``
 
 Generates a unique PIN and Serial Number. and returns it to the client in JSON format.
 
-### To validate the PIN and Serial Number
+### To validate the Serial Number
 
-to validate pin,
-this endpoints checks if the pin is valid or not, returnig response in JSON 
-
-- `pin-gen-api.herokuapp.com/<pin>`
-
-or
-
-- `pin-gen-api.herokuapp.com/pin/<pin>`
 
 to validate serial number
-this endpoints checks if the Serial No is valid or not, returnig response in JSON
+this endpoints checks if the Serial No is valid or not, returnig response and the associated PIN in JSON
 
-- `pin-gen-api.herokuapp.com/serial_no/<serial no>`
+- `pin-gen-api.herokuapp.com/<serial no>`
 
 
 
