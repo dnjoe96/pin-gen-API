@@ -31,8 +31,6 @@ def twelve_digit_serial_no(id):
     return int(twelve_digit_id)
 
 
-def database_serial_no(twelve_digit_id):
-    a = int(twelve_digit_id)
-    b = 10**11
-    db_id = a - b
+def database_serial_no(twelve_digit_sn):
+    db_id = int(twelve_digit_sn) - 10**11
     return db_id
