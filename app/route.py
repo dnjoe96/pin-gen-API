@@ -38,6 +38,7 @@ def index():
 
     # storing to mongo db
     mongo_data.insert({'serial_no': serial_number.s_n, 'pin': pin1})
+
     return jsonify({'serial number': twelve_digit_serial_no(serial_number.s_n), 'PIN': pin1})
 
 
