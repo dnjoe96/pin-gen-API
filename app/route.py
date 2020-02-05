@@ -1,6 +1,6 @@
 from app import app, db, mongo
 from flask import jsonify
-from app.models import Register, random_digits, twelve_digit_serial_no, database_serial_no
+from app.models import Register, random_digits, twelve_digit_serial_no
 
 
 @app.route('/', methods=['GET'])
@@ -35,11 +35,12 @@ def index():
     db.session.commit()
     serial_number = Register.query.filter_by(pin=str(pin)).first()
     pin1 = pin
+    sn = twelve_digit_serial_no(serial_number.s_n)
 
     # storing to mongo db
-    mongo_data.insert({'serial_no': serial_number.s_n, 'pin': pin1})
+    mongo_data.insert({'serial_no': sn, 'pin': pin1})
 
-    return jsonify({'serial number': twelve_digit_serial_no(serial_number.s_n), 'PIN': pin1})
+    return jsonify({'serial number': sn, 'PIN': pin1})
 
 
 @app.route('/<string:serial_no>', methods=['GET'])
@@ -48,11 +49,9 @@ def check_pin(serial_no):
     This endpoint verifies that the pin entered matches with what is in the database.
     if it exists, return 'valid' else, returns 'Invalid
     """
-    s_n = database_serial_no(serial_no)
-
     # searching to mongo db
     mongo_data = mongo.db.pin_data
-    search = mongo_data.find_one({'serial_no': s_n})
+    search = mongo_data.find_one({'serial_no': int(serial_no)})
 
     if search:
         return jsonify({'message': 'Valid Serial No', 'pin': search['pin']})
