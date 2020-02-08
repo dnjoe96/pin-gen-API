@@ -20,3 +20,4 @@ pytz==2019.3
 urllib3==1.25.6
 PyMongo==3.10.1
 flask-pymongo==2.3.0
+africastalking==1.1.9
