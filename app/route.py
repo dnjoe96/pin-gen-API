@@ -1,5 +1,5 @@
-from app import app, db, mongo
-from flask import jsonify
+from app import app, db, mongo, ussd
+from flask import jsonify, request
 from app.models import Register, random_digits, twelve_digit_serial_no
 
 
@@ -56,3 +56,41 @@ def check_pin(serial_no):
     if search:
         return jsonify({'message': 'Valid Serial No', 'pin': search['pin']})
     return jsonify({'message': 'Invalid serial No !!!'})
+
+
+@app.route('/ussd', methods=['GET', 'POST'])
+def ussd():
+    global response
+    session_id = request.values.get("sessionId",None)
+    service_code = request.values.get("serviceCode",None)
+    phone_number = request.values.get("phoneNumber",None)
+    print(phone_number)
+    text = request.values.get("text","default")
+    sms_phone_number = []
+    sms_phone_number.append(phone_number)
+
+    if text == "":
+        response = "CON What would you like to do?\n"
+        response += "1. Check account details\n"
+        response += "2. Check phone number"
+
+    elif text == "1":
+        response = "CON What would you like to check on your account?\n"
+        response += "1. Account number\n"
+        response += "2. Account balance"
+
+    elif text == "2":
+        response = "END Your phone number is {}".format(phone_number)
+
+    elif text == "1*1":
+        account_number = "1243324376742"
+        response = "END Your account number is {}".format(account_number)
+
+    elif text == "1*2":
+        account_balance = "100,000"
+        response = "END Your account balance is KES {}".format(account_balance)
+
+    else:
+        response = "END Invalid input. Try again."
+
+    return response
