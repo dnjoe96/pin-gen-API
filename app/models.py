@@ -1,4 +1,4 @@
-from app import db
+from app import db, sms
 from datetime import datetime
 import random
 
@@ -34,3 +34,19 @@ def twelve_digit_serial_no(id):
 def database_serial_no(twelve_digit_sn):
     db_id = int(twelve_digit_sn) - 10**11
     return db_id
+
+
+def send_message(phone, num, serial_set):
+    """ function to send SMS response to the user, getting the contact details of the owner of the card """
+    if num == 1:
+        sms_message = '{} card Activated'.format(num) + ' ' + 'serial number: {}'.format(serial_set[0])
+    else:
+        sms_message = '{} cards Activated'.format(num) + ' ' + 'range: from {} to {}'.format(serial_set[0], serial_set[-1])
+
+    phone_number = [phone]
+
+    try:
+        response = sms.send(sms_message, phone_number)
+        print(response)
+    except ConnectionError:
+        return 'Network Error'

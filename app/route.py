@@ -38,12 +38,12 @@ def index():
     sn = twelve_digit_serial_no(serial_number.s_n)
 
     # storing to mongo db
-    mongo_data.insert({'serial_no': sn, 'pin': pin1})
+    mongo_data.insert({'serial_no': sn, 'pin': pin1, 'activation_status': 0})
 
     return jsonify({'serial number': sn, 'PIN': pin1})
 
 
-@app.route('/<string:serial_no>', methods=['GET'])
+@app.route('/check/<string:serial_no>', methods=['GET'])
 def check_pin(serial_no):
     """
     This endpoint verifies that the pin entered matches with what is in the database.
