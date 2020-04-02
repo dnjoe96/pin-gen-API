@@ -111,7 +111,7 @@ def ussd():
         response = "CON Welcome\n"
         response += "enter phone number\n"
 
-    elif len(text) >= 11:
+    elif len(text.split('*')[0]) >= 11:
         response = "CON select symptoms\n"
         response += "1. cough\n"
         response += "2. sneezing\n"
@@ -122,7 +122,7 @@ def ussd():
         response += "0. next menu"
 
         if text.split('*')[-1] != 0:
-            save = text.split('*')[-1]
+            save = text.split('*')
             print(save)
     elif text.split('*')[-1] == 0:
         response = "CON select symptoms\n"
