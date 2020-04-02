@@ -58,6 +58,44 @@ def check_pin(serial_no):
     return jsonify({'message': 'Invalid serial No !!!'})
 
 
+# @app.route('/ussd', methods=['GET', 'POST'])
+# def ussd():
+#     global response
+#     session_id = request.values.get("sessionId",None)
+#     service_code = request.values.get("serviceCode",None)
+#     phone_number = request.values.get("phoneNumber",None)
+#     print(phone_number)
+#     text = request.values.get("text","default")
+#     sms_phone_number = []
+#     sms_phone_number.append(phone_number)
+#
+#     if text == "":
+#         response = "CON What would you like to do?\n"
+#         response += "1. Check account details\n"
+#         response += "2. Check phone number"
+#
+#     elif text == "1":
+#         response = "CON What would you like to check on your account?\n"
+#         response += "1. Account number\n"
+#         response += "2. Account balance"
+#
+#     elif text == "2":
+#         response = "END Your phone number is {}".format(phone_number)
+#
+#     elif text == "1*1":
+#         account_number = "1243324376742"
+#         response = "END Your account number is {}".format(account_number)
+#
+#     elif text == "1*2":
+#         account_balance = "100,000"
+#         response = "END Your account balance is KES {}".format(account_balance)
+#
+#     else:
+#         response = "END Invalid input. Try again."
+#
+#     return response
+
+
 @app.route('/ussd', methods=['GET', 'POST'])
 def ussd():
     global response
@@ -70,27 +108,51 @@ def ussd():
     sms_phone_number.append(phone_number)
 
     if text == "":
-        response = "CON What would you like to do?\n"
-        response += "1. Check account details\n"
-        response += "2. Check phone number"
+        response = "CON Welcome\n"
+        response += "enter phone number\n"
 
-    elif text == "1":
-        response = "CON What would you like to check on your account?\n"
-        response += "1. Account number\n"
-        response += "2. Account balance"
+    elif len(text) >= 11:
+        response = "CON select symptoms\n"
+        response += "1. cough\n"
+        response += "2. sneezing\n"
+        response += "3. laughing\n"
+        response += "4. shortness of breath\n"
+        response += "5. body pain\n"
+        response += "6. weakness\n"
+        response += "0. next menu"
 
-    elif text == "2":
-        response = "END Your phone number is {}".format(phone_number)
+        if text.split('*')[-1] != 0:
+            save = text.split('*')
+            print(save)
+        elif text.split('*') == 0:
+            response = "CON select symptoms\n"
+            response += "7. cough\n"
+            response += "8. sneezing\n"
+            response += "9. laughing\n"
+            response += "10. shortness of breath\n"
+            response += "11. body pain\n"
+            response += "12. weakness\n"
+            response += "1. end menu"
 
-    elif text == "1*1":
-        account_number = "1243324376742"
-        response = "END Your account number is {}".format(account_number)
+            if text.split('*')[-1] != 1:
+                save = text.split('*')
+                print(save)
+                response = "END data captured."
 
-    elif text == "1*2":
-        account_balance = "100,000"
-        response = "END Your account balance is KES {}".format(account_balance)
 
-    else:
-        response = "END Invalid input. Try again."
+
+    # elif text == "2":
+    #     response = "END Your phone number is {}".format(phone_number)
+    #
+    # elif text == "1*1":
+    #     account_number = "1243324376742"
+    #     response = "END Your account number is {}".format(account_number)
+    #
+    # elif text == "1*2":
+    #     account_balance = "100,000"
+    #     response = "END Your account balance is KES {}".format(account_balance)
+    #
+    # else:
+    #     response = "END Invalid input. Try again."
 
     return response
