@@ -99,6 +99,7 @@ def check_pin(serial_no):
 @app.route('/ussd', methods=['GET', 'POST'])
 def ussd():
     global response
+    global save
     session_id = request.values.get("sessionId",None)
     service_code = request.values.get("serviceCode",None)
     phone_number = request.values.get("phoneNumber",None)
