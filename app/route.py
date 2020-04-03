@@ -105,9 +105,10 @@ def ussd():
     phone_number = request.values.get("phoneNumber",None)
     print(phone_number)
     text = request.values.get("text","default")
-    sms_phone_number = []
-    sms_phone_number.append(phone_number)
 
+    def_symptoms = []
+
+    symptoms = []
     data = []
 
     def func():
@@ -121,6 +122,20 @@ def ussd():
         final_selection = selection[0] + selection[1]
 
         print(final_selection)
+        for i in list(final_selection):
+            symptoms.append(def_symptoms[int(i)])
+
+        str1 = ""
+
+        # traverse in the string
+        for y in symptoms:
+            str1 += y + ','
+
+            # return string
+        final_symptoms = str1[:-2]
+        print(final_symptoms)
+
+
 
     if text == "":
         response = "CON Welcome\n"
