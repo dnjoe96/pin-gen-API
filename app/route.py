@@ -110,7 +110,7 @@ def ussd():
             "enlarged oesophagus", "neurological alterations", "diarrhoea", "blood in the stool", "liver enlargement",
             "meningitis", "constipation"]
 
-    phone = []
+    # phone = []
     symptoms = []
     data = []
 
@@ -140,7 +140,7 @@ def ussd():
         print(final_symptoms)
 
         # here is the phone number entered
-        num = phone[0]
+        # num = phone[0]
 
 
     if text == "":
