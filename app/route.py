@@ -175,7 +175,7 @@ def ussd():
         response += "3. fever\n"
         response += "4. headache\n"
         response += "5. pallor\n"
-        response += "0. next menu"
+        response += "0. next menu\n"
         response += "00. End session"
 
     elif text.split('*')[-1] == '0':
