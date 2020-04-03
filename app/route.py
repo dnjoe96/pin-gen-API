@@ -161,7 +161,15 @@ def ussd():
     elif text.split('*')[-1] == '00':
         response = "END data captured."
 
+    print(save)
+    selection =[]
+    for one in save:
+        if len(one) != 11 and one != '0' and one != '00':
+            selection.append(one)
 
+    final_selection = selection[0] + selection[1]
+
+    print(final_selection)
 
     # elif text == "2":
     #     response = "END Your phone number is {}".format(phone_number)
