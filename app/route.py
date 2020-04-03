@@ -123,7 +123,7 @@ def ussd():
         response += "6. weakness\n"
         response += "0. next menu"
 
-    elif text.split('*')[-1] != '0':
+    elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
         save = text.split('*')
         print(save)
         response = "CON select symptoms\n"
@@ -146,17 +146,17 @@ def ussd():
         response += "12. weakness\n"
         response += "00. End session"
 
-    elif text.split('*')[-1] != '00':
-        save = text.split('*')
-        print(save)
-        response = "CON select symptoms\n"
-        response += "7. cough\n"
-        response += "8. sneezing\n"
-        response += "9. laughing\n"
-        response += "10. shortness of breath\n"
-        response += "11. body pain\n"
-        response += "12. weakness\n"
-        response += "00. End session"
+    # elif text.split('*')[-1] != '00':
+    #     save = text.split('*')
+    #     print(save)
+    #     response = "CON select symptoms\n"
+    #     response += "7. cough\n"
+    #     response += "8. sneezing\n"
+    #     response += "9. laughing\n"
+    #     response += "10. shortness of breath\n"
+    #     response += "11. body pain\n"
+    #     response += "12. weakness\n"
+    #     response += "00. End session"
 
     elif text.split('*')[-1] == '00':
         response = "END data captured."
