@@ -225,6 +225,11 @@ def ussd():
         response += "Data for has been captured \n"
         response += "Remember to call NCDC on \n"
         response += "080000101010 if you suspect COVID-19."
+
+    else:
+        response = "END Thank you for using HealthRader\n"
+        response += "You have entered an invalid number."
+
     return response
 
 
