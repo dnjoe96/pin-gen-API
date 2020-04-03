@@ -104,7 +104,7 @@ def ussd():
     phone_number = request.values.get("phoneNumber",None)
     text = request.values.get("text","default")
 
-    def_symptoms = ["tiredness", "dry_cough", "aches", "sore throat,", "nasal_congestion,", "runny nose", "muscle pain",
+    def_symptoms = ["tiredness", "dry_cough", "aches", "sore throat", "nasal_congestion", "runny nose", "muscle pain",
                     "difficulty in breathing", "swelling", "abdominal pain", "chest pain", "cardiac disorder",
                     "enlarged oesophagus", "neurological alterations", "diarrhoea", "blood in the stool",
                     "liver enlargement", "meningitis", "constipation"]
@@ -113,6 +113,7 @@ def ussd():
     data = []
 
     def func():
+        global phone
         # print(data)
         save = data[-1]
         selection = []
@@ -130,7 +131,7 @@ def ussd():
             sel = []
             for i in selection[1]:
                 sel.append(int(i) + 9)
-            final_selection = first_selection + second_selection
+            final_selection = first_selection + sel
 
 
 
@@ -151,6 +152,9 @@ def ussd():
         # here is the phone number entered
         num = phone
         print(num)
+
+    # the phone number to pass into the Response
+    number = phone
 
     if text == "":
         response = "CON Welcome\n"
@@ -214,7 +218,6 @@ def ussd():
         print(save)
         func()
         response = "END data captured."
-
     return response
 
 
