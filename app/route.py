@@ -99,23 +99,23 @@ def check_pin(serial_no):
 @app.route('/ussd', methods=['GET', 'POST'])
 def ussd():
     global response
-    global save
     session_id = request.values.get("sessionId",None)
     service_code = request.values.get("serviceCode",None)
     phone_number = request.values.get("phoneNumber",None)
-    print(phone_number)
     text = request.values.get("text","default")
+
 
     def_symptoms = ["skin lesion", "purplish swelling of eyelids", "fever", "headache", "pallor", "muscle pain",
             "difficulty in breathing", "swelling", "abdominal pain", "chest pain", "cardiac disorder",
             "enlarged oesophagus", "neurological alterations", "diarrhoea", "blood in the stool", "liver enlargement",
             "meningitis", "constipation"]
 
+    phone = []
     symptoms = []
     data = []
 
     def func():
-        print(data)
+        # print(data)
         save = data[-1]
         selection =[]
 
@@ -125,20 +125,22 @@ def ussd():
 
         final_selection = selection[0] + selection[1]
 
-        print(final_selection)
+        # print(final_selection)
         for i in list(final_selection):
             symptoms.append(def_symptoms[int(i)-1])
 
         str1 = ""
 
-        # traverse in the string
+        # converting list to string seperated with comma
         for y in symptoms:
             str1 += y + ','
 
-            # return string
+        # here are the final symptoms according to the selection
         final_symptoms = str1[:-2]
         print(final_symptoms)
 
+        # here is the phone number entered
+        num = phone[0]
 
 
     if text == "":
@@ -147,6 +149,7 @@ def ussd():
 
     # elif len(text.split('*')[-1]) >= 11 or text.split('*')[-1] == '1':
     elif len(text) == 11:
+        phone.append(text)
         save = text.split('*')
         data.append(save)
         print(save)
@@ -201,21 +204,5 @@ def ussd():
         print(save)
         func()
         response = "END data captured."
-
-
-
-    # elif text == "2":
-    #     response = "END Your phone number is {}".format(phone_number)
-    #
-    # elif text == "1*1":
-    #     account_number = "1243324376742"
-    #     response = "END Your account number is {}".format(account_number)
-    #
-    # elif text == "1*2":
-    #     account_balance = "100,000"
-    #     response = "END Your account balance is KES {}".format(account_balance)
-    #
-    # else:
-    #     response = "END Invalid input. Try again."
 
     return response
