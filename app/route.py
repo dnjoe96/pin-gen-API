@@ -123,7 +123,10 @@ def ussd():
             if len(one) != 11 and one != '0' and one != '00':
                 selection.append(one)
 
-        final_selection = selection[0] + selection[1]
+        if len(selection) == 1:
+            final_selection = selection[0]
+        else:
+            final_selection = selection[0] + selection[1]
 
         # print(final_selection)
         for i in list(final_selection):
