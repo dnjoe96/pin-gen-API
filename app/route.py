@@ -108,6 +108,8 @@ def ussd():
     sms_phone_number = []
     sms_phone_number.append(phone_number)
 
+    data = []
+
     if text == "":
         response = "CON Welcome\n"
         response += "enter phone number\n"
@@ -126,6 +128,7 @@ def ussd():
 
     elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
         save = text.split('*')
+        data.append(save)
         print(save)
         response = "CON select symptoms\n"
         response += "1. cough\n"
@@ -138,6 +141,9 @@ def ussd():
         response += "00. End session"
 
     elif text.split('*')[-1] == '0':
+        save = text.split('*')
+        data.append(save)
+        print(save)
         response = "CON select symptoms\n"
         response += "7. cough\n"
         response += "8. sneezing\n"
@@ -160,9 +166,13 @@ def ussd():
     #     response += "00. End session"
 
     elif text.split('*')[-1] == '00':
+        save = text.split('*')
+        data.append(save)
+        print(save)
         response = "END data captured."
 
-    print(save)
+    print(data)
+    save = data[-1]
     selection =[]
     for one in save:
         if len(one) != 11 and one != '0' and one != '00':
