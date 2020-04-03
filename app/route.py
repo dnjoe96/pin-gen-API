@@ -149,7 +149,7 @@ def ussd():
 
     # elif len(text.split('*')[-1]) >= 11 or text.split('*')[-1] == '1':
     elif len(text) == 11:
-        phone.append(text)
+        # phone.append(text)
         save = text.split('*')
         data.append(save)
         print(save)
