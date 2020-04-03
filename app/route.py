@@ -110,13 +110,27 @@ def ussd():
 
     data = []
 
+    def func():
+        print(data)
+        save = data[-1]
+        selection =[]
+        for one in save:
+            if len(one) != 11 and one != '0' and one != '00':
+                selection.append(one)
+
+        final_selection = selection[0] + selection[1]
+
+        print(final_selection)
+
     if text == "":
         response = "CON Welcome\n"
         response += "enter phone number\n"
 
     # elif len(text.split('*')[-1]) >= 11 or text.split('*')[-1] == '1':
     elif len(text) == 11:
-        print(text)
+        save = text.split('*')
+        data.append(save)
+        print(save)
         response = "CON select symptoms\n"
         response += "1. cough\n"
         response += "2. sneezing\n"
@@ -169,18 +183,10 @@ def ussd():
         save = text.split('*')
         data.append(save)
         print(save)
+        func()
         response = "END data captured."
 
-    print(data)
-    save = data[-1]
-    selection =[]
-    for one in save:
-        if len(one) != 11 and one != '0' and one != '00':
-            selection.append(one)
 
-    final_selection = selection[0] + selection[1]
-
-    print(final_selection)
 
     # elif text == "2":
     #     response = "END Your phone number is {}".format(phone_number)
