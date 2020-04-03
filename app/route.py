@@ -106,7 +106,10 @@ def ussd():
     print(phone_number)
     text = request.values.get("text","default")
 
-    def_symptoms = []
+    def_symptoms = ["skin lesion", "purplish swelling of eyelids", "fever", "headache", "pallor", "muscle pain",
+            "difficulty in breathing", "swelling", "abdominal pain", "chest pain", "cardiac disorder",
+            "enlarged oesophagus", "neurological alterations", "diarrhoea", "blood in the stool", "liver enlargement",
+            "meningitis", "constipation"]
 
     symptoms = []
     data = []
@@ -115,6 +118,7 @@ def ussd():
         print(data)
         save = data[-1]
         selection =[]
+
         for one in save:
             if len(one) != 11 and one != '0' and one != '00':
                 selection.append(one)
@@ -123,7 +127,7 @@ def ussd():
 
         print(final_selection)
         for i in list(final_selection):
-            symptoms.append(def_symptoms[int(i)])
+            symptoms.append(def_symptoms[int(i)-1])
 
         str1 = ""
 
@@ -147,12 +151,11 @@ def ussd():
         data.append(save)
         print(save)
         response = "CON select symptoms\n"
-        response += "1. cough\n"
-        response += "2. sneezing\n"
-        response += "3. laughing\n"
-        response += "4. shortness of breath\n"
-        response += "5. body pain\n"
-        response += "6. weakness\n"
+        response += "1. skin lesion\n"
+        response += "2. purplish swelling of eyelids\n"
+        response += "3. fever\n"
+        response += "4. headache\n"
+        response += "5. pallor\n"
         response += "0. next menu"
 
     elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
@@ -160,26 +163,24 @@ def ussd():
         data.append(save)
         print(save)
         response = "CON select symptoms\n"
-        response += "1. cough\n"
-        response += "2. sneezing\n"
-        response += "3. laughing\n"
-        response += "4. shortness of breath\n"
-        response += "5. body pain\n"
-        response += "6. weakness\n"
-        response += "0. next menu\n"
+        response += "1. skin lesion\n"
+        response += "2. purplish swelling of eyelids\n"
+        response += "3. fever\n"
+        response += "4. headache\n"
+        response += "5. pallor\n"
+        response += "0. next menu"
         response += "00. End session"
 
     elif text.split('*')[-1] == '0':
         save = text.split('*')
         data.append(save)
         print(save)
+
         response = "CON select symptoms\n"
-        response += "7. cough\n"
-        response += "8. sneezing\n"
-        response += "9. laughing\n"
-        response += "10. shortness of breath\n"
-        response += "11. body pain\n"
-        response += "12. weakness\n"
+        response += "6. muscle pain\n"
+        response += "7. difficulty in breathing\n"
+        response += "8. swelling\n"
+        response += "9. abdominal pain\n"
         response += "00. End session"
 
     # elif text.split('*')[-1] != '00':
