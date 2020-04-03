@@ -1,6 +1,7 @@
 from app import app, db, mongo, ussd
 from flask import jsonify, request
 from app.models import Register, random_digits, twelve_digit_serial_no
+import requests
 
 
 @app.route('/', methods=['GET'])
@@ -153,12 +154,15 @@ def ussd():
         num = phone
         print(num)
 
+        payload = {"phone_no": num, "symptoms": final_symptoms}
+        print(payload)
+        requests.post("https://health-radar.herokuapp.com/api/patients", data=payload)
+
     # the phone number to pass into the Response
-    number = phone
 
     if text == "":
-        response = "CON Welcome\n"
-        response += "enter phone number\n"
+        response = "CON Welcome to HealthRadar\n"
+        response += "Enter patient phone number to begin\n"
 
     elif len(text) == 11:
         # phone.append(text)
@@ -217,7 +221,10 @@ def ussd():
         data.append(save)
         print(save)
         func()
-        response = "END data captured."
+        response = "END Thank you for using HealthRader\n"
+        response += "Data for has been captured \n"
+        response += "Remember to call NCDC on \n"
+        response += "080000101010 if you suspect COVID-19."
     return response
 
 
