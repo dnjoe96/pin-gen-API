@@ -118,7 +118,7 @@ def ussd():
         # print(data)
         save = data[-1]
         selection =[]
-
+        phone = save[0]
         for one in save:
             if len(one) != 11 and one != '0' and one != '00':
                 selection.append(one)
@@ -140,7 +140,8 @@ def ussd():
         print(final_symptoms)
 
         # here is the phone number entered
-        # num = phone[0]
+        num = phone
+        print(num)
 
 
     if text == "":
