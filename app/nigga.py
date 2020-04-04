@@ -127,11 +127,11 @@ def ussd():
         print(final_symptoms)
 
         # here is the phone number entered
-        num = phone
-        print(num)
-
-        payloads = {"patient_number": num, "provider_number": phone_number, "symptoms": final_symptoms}
+        patient_number = phone
+        provider_number = '0' + phone_number[4:]
+        payloads = {"patient_number": patient_number, "provider_number": provider_number, "symptoms": final_symptoms}
         print(payloads)
+
         requests.post("https://health-radar.herokuapp.com/api/patients", data=payloads)
 
     # the phone number to pass into the Response
@@ -159,8 +159,9 @@ def ussd():
         if json.loads(r.content)['success'] == False:
             response = "END Thank you for using HealthRadar\n"
             response += "You have entered an invalid number."
+        else:
+            response = display_menu()
 
-        response = display_menu()
     elif len(text.split("*")[1]) == 11 and len(text.split('*')) == 2:
         save = text.split('*')[1]
         data.append(save)
