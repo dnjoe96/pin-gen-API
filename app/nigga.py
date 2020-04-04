@@ -27,12 +27,12 @@ def display_menu():
 def first_menu():
     response = "Select symptoms\n"
     response += "1. Fever\n"
-    response += "2. Dry_cough\n"
+    response += "2. Dry cough\n"
     response += "3. Myalgia_or_Arthralgia\n"
     response += "4. Fatgue\n"
-    response += "5. Sputum_production\n"
-    response += "6. Shortness_of_breath\n"
-    response += "7. Sore_throat\n"
+    response += "5. Sputum production\n"
+    response += "6. Shortness of breath\n"
+    response += "7. Sore throat\n"
     response += "8. Headache\n"
     response += "9. Chills\n"
     response += "0. More Symptoms\n"
@@ -43,12 +43,12 @@ def first_menu():
 def second_menu():
     response = "Select symptoms\n"
     response += "1. Fever\n"
-    response += "2. Dry_cough\n"
+    response += "2. Dry cough\n"
     response += "3. Myalgia_or_Arthralgia\n"
     response += "4. Fatgue\n"
-    response += "5. Sputum_production\n"
-    response += "6. Shortness_of_breath\n"
-    response += "7. Sore_throat\n"
+    response += "5. Sputum production\n"
+    response += "6. Shortness of breath\n"
+    response += "7. Sore throat\n"
     response += "8. Headache\n"
     response += "9. Chills\n"
     response += "0. More Symptoms\n"
@@ -79,8 +79,8 @@ def ussd():
     global response
     session_id = request.values.get("sessionId", None)
     service_code = request.values.get("serviceCode", None)
-    # phone_number = request.values.get("phoneNumber",None)
-    phone_number = '+2349018858924'
+    phone_number = request.values.get("phoneNumber",None)
+    # phone_number = '+2349018858924'
     text = request.values.get("text", "default")
 
     def_symptoms = ["fever", "dry_cough", "myalgia_or_arthralgia", "fatgue", "sputum_production",
@@ -139,22 +139,18 @@ def ussd():
 
     if text == "":
         response = get_pin()
-        # pin = text.split("*")[0]
+
     elif len(text) == 4:
 
         pin = text.split("*")[0]
 
         phones = '0' + phone_number[4:]
 
-        # phones = '07062066313'
         request_headers = {"Authorization": API_KEY}
         payload = {"phone": phones, "PIN": pin}
         print(payload)
         r = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
                           headers=request_headers)
-        # name = json.loads(r.content)
-        # status = name['success']
-        # print(status)
 
         print(json.loads(r.content)['success'])
 
@@ -180,6 +176,8 @@ def ussd():
         save = text.split('*')
         data.append(save)
         print(save)
+
+        # this layer ensures that the phone number is correct, else error
         if len(text.split("*")[1]) == 11:
             response = second_menu()
         else:
