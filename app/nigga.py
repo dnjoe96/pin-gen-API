@@ -180,7 +180,11 @@ def ussd():
         save = text.split('*')
         data.append(save)
         print(save)
-        response = second_menu()
+        if len(text.split("*")[1]) == 11:
+            response = second_menu()
+        else:
+            response = "END Thank you for using HealthRadar\n"
+            response += "You have entered an invalid number."
 
     elif text.split('*')[-1] == '0':
         save = text.split('*')
