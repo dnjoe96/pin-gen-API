@@ -157,7 +157,7 @@ def ussd():
         if json.loads(r.content)['success'] == False:
             response = "END Thank you for using HealthRadar\n"
             response += "You have entered an invalid number."
-        # if very:
+
         response = display_menu()
     elif len(text.split("*")[1]) == 11:
         save = text.split('*')[1]
@@ -189,6 +189,6 @@ def ussd():
         response += "Remember to call NCDC on \n"
         response += "0800 9700 0010 if you suspect COVID-19."
 
-    resp = make_response(response, 200)
-    resp.headers["Content-type"] = "text/plain"
-    return resp
+    # resp = make_response(response, 200)
+    # resp.headers["Content-type"] = "text/plain"
+    return response
