@@ -175,6 +175,7 @@ def ussd():
 
         resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
                           headers=request_headers)
+        print(json.loads(resp.content)['success'])
 
         if json.loads(resp.content)['success'] is False:
             response = "END Thank you for using HealthRadar\n"
