@@ -1,7 +1,7 @@
 from app import app, db, mongo, ussd
 from flask import jsonify, request
 from app.models import Register, random_digits, twelve_digit_serial_no
-import requests
+import requests, json
 
 
 API_KEY = 'healthradar-95302420205yeeyqz'
@@ -173,7 +173,7 @@ def ussd():
         resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
                           headers=request_headers)
 
-        if resp['success'] is False:
+        if json.load(resp.content)['success'] is False:
             response = "END Thank you for using HealthRadar\n"
             response += "You have entered an invalid number."
 
