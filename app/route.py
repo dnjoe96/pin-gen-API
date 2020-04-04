@@ -100,7 +100,7 @@ def check_pin(serial_no):
 #     return response
 
 
-# @app.route('/ussd', methods=['GET', 'POST'])
+@app.route('/ussd', methods=['GET', 'POST'])
 def ussd():
     global response
     session_id = request.values.get("sessionId",None)
