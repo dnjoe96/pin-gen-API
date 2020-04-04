@@ -74,7 +74,7 @@ def third_menu():
 API_KEY = 'healthradar-95302420205yeeyqz'
 
 
-# @app.route('/ussd', methods=['GET', 'POST'])
+@app.route('/ussd', methods=['GET', 'POST'])
 def ussd():
     global response
     session_id = request.values.get("sessionId",None)
