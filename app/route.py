@@ -178,7 +178,7 @@ def ussd():
                           headers=request_headers)
         print(json.loads(resp.content)['success'])
 
-        if json.loads(resp.content)['success'] is False:
+        if json.loads(resp.content)['success'] == False:
             response = "END Thank you for using HealthRadar\n"
             response += "You have entered an invalid number."
 
