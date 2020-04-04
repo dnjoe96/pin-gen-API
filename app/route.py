@@ -4,6 +4,9 @@ from app.models import Register, random_digits, twelve_digit_serial_no
 import requests
 
 
+API_KEY = 'healthradar-95302420205yeeyqz'
+
+
 @app.route('/', methods=['GET'])
 def index():
     """
@@ -134,9 +137,6 @@ def ussd():
                 sel.append(int(i) + 9)
             final_selection = first_selection + sel
 
-
-
-        # print(final_selection)
         for i in final_selection:
             symptoms.append(def_symptoms[int(i) - 1])
 
@@ -154,7 +154,7 @@ def ussd():
         num = phone
         print(num)
 
-        payload = {"phone_no": num, "symptoms": final_symptoms}
+        payload = {"patient_number": num, "provider_number": phone_number, "symptoms": final_symptoms}
         print(payload)
         requests.post("https://health-radar.herokuapp.com/api/patients", data=payload)
 
@@ -162,9 +162,22 @@ def ussd():
 
     if text == "":
         response = "CON Welcome to HealthRadar\n"
-        response += "Enter patient phone number to begin\n"
+        # response += "Enter patient phone number to begin\n"
+        response += "Enter your PIN to begin\n"
 
-    elif len(text) == 11:
+    # adding the layer to verify PIN
+    elif len(text) == 5:
+        request_headers = {"Authorization": "{}".format(API_KEY)}
+        payload = {"phone": phone_number, "PIN": text}
+
+        resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
+                          headers=request_headers)
+
+        if resp.status_code is 200:
+            response = "END Thank you for using HealthRadar\n"
+            response += "You have entered an invalid number."
+
+    elif text.split('*')[1] == 11:
         # phone.append(text)
         save = text.split('*')
         data.append(save)
@@ -222,13 +235,10 @@ def ussd():
         print(save)
         func()
         response = "END Thank you for using HealthRader\n"
+        response += "Data for {} has been captured \n".format(phone)
         response += "Data for has been captured \n"
         response += "Remember to call NCDC on \n"
         response += "080000101010 if you suspect COVID-19."
-
-    else:
-        response = "END Thank you for using HealthRader\n"
-        response += "You have entered an invalid number."
 
     return response
 
