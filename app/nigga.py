@@ -79,7 +79,8 @@ def ussd():
     global response
     session_id = request.values.get("sessionId",None)
     service_code = request.values.get("serviceCode",None)
-    phone_number = request.values.get("phoneNumber",None)
+    # phone_number = request.values.get("phoneNumber",None)
+    phone_number = '+2349018858924'
     text = request.values.get("text", "default")
 
     def_symptoms = ["fever", "dry_cough", "myalgia_or_arthralgia", "fatgue", "sputum_production",
@@ -166,7 +167,13 @@ def ussd():
         save = text.split('*')[1]
         data.append(save)
         print(save)
-        response = first_menu()
+
+        # this layer ensures that the phone number is correct, else error
+        if len(text.split("*")[1]) == 11:
+            response = first_menu()
+        else:
+            response = "END Thank you for using HealthRadar\n"
+            response += "You have entered an invalid number."
 
     elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
         save = text.split('*')
