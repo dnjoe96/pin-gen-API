@@ -166,7 +166,9 @@ def ussd():
         response += "Enter your PIN to begin\n"
 
     # adding the layer to verify PIN
-    elif len(text) == 5:
+    elif len(text) == 4:
+        # 07062066313
+        # 7309
         request_headers = {"Authorization": "{}".format(API_KEY)}
         payload = {"phone": phone_number, "PIN": text}
 
