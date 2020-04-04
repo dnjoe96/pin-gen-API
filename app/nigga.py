@@ -159,7 +159,7 @@ def ussd():
             response += "You have entered an invalid number."
 
         response = display_menu()
-    elif len(text.split("*")[1]) == 11:
+    elif len(text.split("*")[1]) == 11 and len(text.split('*')) == 2:
         save = text.split('*')[1]
         data.append(save)
         print(save)
