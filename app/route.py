@@ -101,148 +101,148 @@ def check_pin(serial_no):
 
 
 # @app.route('/ussd', methods=['GET', 'POST'])
-# def ussd():
-#     global response
-#     session_id = request.values.get("sessionId",None)
-#     service_code = request.values.get("serviceCode",None)
-#     phone_number = request.values.get("phoneNumber",None)
-#     text = request.values.get("text","default")
-#
-#     def_symptoms = ["tiredness", "dry_cough", "aches", "sore throat", "nasal_congestion", "runny nose", "muscle pain",
-#                     "difficulty in breathing", "swelling", "abdominal pain", "chest pain", "cardiac disorder",
-#                     "enlarged oesophagus", "neurological alterations", "diarrhoea", "blood in the stool",
-#                     "liver enlargement", "meningitis", "constipation"]
-#
-#     symptoms = []
-#     data = []
-#
-#     def func():
-#         global phone
-#         # print(data)
-#         save = data[-1]
-#         selection = []
-#         phone = save[0]
-#
-#         for one in save:
-#             if len(one) != 11 and one != '0' and one != '00':
-#                 selection.append(one)
-#
-#         if len(selection) == 1:
-#             final_selection = list(selection[0])
-#         else:
-#             first_selection = list(selection[0])
-#             second_selection = selection[1]
-#             sel = []
-#             for i in selection[1]:
-#                 sel.append(int(i) + 9)
-#             final_selection = first_selection + sel
-#
-#         for i in final_selection:
-#             symptoms.append(def_symptoms[int(i) - 1])
-#
-#         str1 = ""
-#
-#         # converting list to string seperated with comma
-#         for y in symptoms:
-#             str1 += y + ','
-#
-#         # here are the final symptoms according to the selection
-#         final_symptoms = str1[:-2]
-#         print(final_symptoms)
-#
-#         # here is the phone number entered
-#         num = phone
-#         print(num)
-#
-#         payload = {"patient_number": num, "provider_number": phone_number, "symptoms": final_symptoms}
-#         print(payload)
-#         requests.post("https://health-radar.herokuapp.com/api/patients", data=payload)
-#
-#     # the phone number to pass into the Response
-#
-#     if text == "":
-#         response = "CON Welcome to HealthRadar\n"
-#         # response += "Enter patient phone number to begin\n"
-#         response += "Enter your PIN to begin\n"
-#
-#     # adding the layer to verify PIN
-#     elif len(text) == 4:
-#         # 07062066313
-#         # 7309
-#         request_headers = {"Authorization": "{}".format(API_KEY)}
-#         payload = {"phone": phone_number, "PIN": text}
-#         print(payload)
-#
-#         resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
-#                           headers=request_headers)
-#
-#         if json.loads(resp.content)['success'] is False:
-#             response = "END Thank you for using HealthRadar\n"
-#             response += "You have entered an invalid number."
-#
-#     elif text.split('*')[1] == 11:
-#         # phone.append(text)
-#         save = text.split('*')
-#         data.append(save)
-#         print(save)
-#         response = "CON select symptoms\n"
-#         response += "1. Tiredness\n"
-#         response += "2. Dry cough\n"
-#         response += "3. Aches\n"
-#         response += "4. Soar throat\n"
-#         response += "5. Nasal Congestion\n"
-#         response += "6. Runny Nose\n"
-#         response += "7. Muscle pain\n"
-#         response += "8. Difficulty in breathing\n"
-#         response += "9. Swelling\n"
-#         response += "0. Next menu\n"
-#         response += "00. End session"
-#
-#     elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
-#         save = text.split('*')
-#         data.append(save)
-#         print(save)
-#         response = "CON select symptoms\n"
-#         response += "1. Tiredness\n"
-#         response += "2. Dry cough\n"
-#         response += "3. Aches\n"
-#         response += "4. Soar throat\n"
-#         response += "5. Nasal Congestion\n"
-#         response += "6. Runny Nose\n"
-#         response += "7. Muscle pain\n"
-#         response += "8. Difficulty in breathing\n"
-#         response += "9. Swelling\n"
-#         response += "0. Next menu\n"
-#         response += "00. End session"
-#
-#     elif text.split('*')[-1] == '0':
-#         save = text.split('*')
-#         data.append(save)
-#         print(save)
-#
-#         response = "CON select symptoms\n"
-#         response += "1. Abdominal Pain\n"
-#         response += "2. Chest pain\n"
-#         response += "3. Cardiac disorder\n"
-#         response += "4. Enlarged Oesophagus\n"
-#         response += "5. Neurological alterations\n"
-#         response += "6. diarrhoea\n"
-#         response += "7. Blood in the stool\n"
-#         response += "8. Liver enlargement\n"
-#         response += "9. Meningitis\n"
-#         response += "00. End session"
-#
-#     elif text.split('*')[-1] == '00':
-#         save = text.split('*')
-#         data.append(save)
-#         print(save)
-#         func()
-#         response = "END Thank you for using HealthRader\n"
-#         response += "Data for {} has been captured \n".format(phone)
-#         response += "Data for has been captured \n"
-#         response += "Remember to call NCDC on \n"
-#         response += "080000101010 if you suspect COVID-19."
-#
-#     return response
+def ussd():
+    global response
+    session_id = request.values.get("sessionId",None)
+    service_code = request.values.get("serviceCode",None)
+    phone_number = request.values.get("phoneNumber",None)
+    text = request.values.get("text","default")
+
+    def_symptoms = ["tiredness", "dry_cough", "aches", "sore throat", "nasal_congestion", "runny nose", "muscle pain",
+                    "difficulty in breathing", "swelling", "abdominal pain", "chest pain", "cardiac disorder",
+                    "enlarged oesophagus", "neurological alterations", "diarrhoea", "blood in the stool",
+                    "liver enlargement", "meningitis", "constipation"]
+
+    symptoms = []
+    data = []
+
+    def func():
+        global phone
+        # print(data)
+        save = data[-1]
+        selection = []
+        phone = save[0]
+
+        for one in save:
+            if len(one) != 11 and one != '0' and one != '00':
+                selection.append(one)
+
+        if len(selection) == 1:
+            final_selection = list(selection[0])
+        else:
+            first_selection = list(selection[0])
+            second_selection = selection[1]
+            sel = []
+            for i in selection[1]:
+                sel.append(int(i) + 9)
+            final_selection = first_selection + sel
+
+        for i in final_selection:
+            symptoms.append(def_symptoms[int(i) - 1])
+
+        str1 = ""
+
+        # converting list to string seperated with comma
+        for y in symptoms:
+            str1 += y + ','
+
+        # here are the final symptoms according to the selection
+        final_symptoms = str1[:-2]
+        print(final_symptoms)
+
+        # here is the phone number entered
+        num = phone
+        print(num)
+
+        payload = {"patient_number": num, "provider_number": phone_number, "symptoms": final_symptoms}
+        print(payload)
+        requests.post("https://health-radar.herokuapp.com/api/patients", data=payload)
+
+    # the phone number to pass into the Response
+
+    if text == "":
+        response = "CON Welcome to HealthRadar\n"
+        # response += "Enter patient phone number to begin\n"
+        response += "Enter your PIN to begin\n"
+
+    # adding the layer to verify PIN
+    elif len(text) == 4:
+        # 07062066313
+        # 7309
+        request_headers = {"Authorization": "{}".format(API_KEY)}
+        payload = {"phone": phone_number, "PIN": text}
+        print(payload)
+
+        resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
+                          headers=request_headers)
+
+        if json.loads(resp.content)['success'] is False:
+            response = "END Thank you for using HealthRadar\n"
+            response += "You have entered an invalid number."
+
+    elif text.split('*')[1] == 11:
+        # phone.append(text)
+        save = text.split('*')
+        data.append(save)
+        print(save)
+        response = "CON select symptoms\n"
+        response += "1. Tiredness\n"
+        response += "2. Dry cough\n"
+        response += "3. Aches\n"
+        response += "4. Soar throat\n"
+        response += "5. Nasal Congestion\n"
+        response += "6. Runny Nose\n"
+        response += "7. Muscle pain\n"
+        response += "8. Difficulty in breathing\n"
+        response += "9. Swelling\n"
+        response += "0. Next menu\n"
+        response += "00. End session"
+
+    elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
+        save = text.split('*')
+        data.append(save)
+        print(save)
+        response = "CON select symptoms\n"
+        response += "1. Tiredness\n"
+        response += "2. Dry cough\n"
+        response += "3. Aches\n"
+        response += "4. Soar throat\n"
+        response += "5. Nasal Congestion\n"
+        response += "6. Runny Nose\n"
+        response += "7. Muscle pain\n"
+        response += "8. Difficulty in breathing\n"
+        response += "9. Swelling\n"
+        response += "0. Next menu\n"
+        response += "00. End session"
+
+    elif text.split('*')[-1] == '0':
+        save = text.split('*')
+        data.append(save)
+        print(save)
+
+        response = "CON select symptoms\n"
+        response += "1. Abdominal Pain\n"
+        response += "2. Chest pain\n"
+        response += "3. Cardiac disorder\n"
+        response += "4. Enlarged Oesophagus\n"
+        response += "5. Neurological alterations\n"
+        response += "6. diarrhoea\n"
+        response += "7. Blood in the stool\n"
+        response += "8. Liver enlargement\n"
+        response += "9. Meningitis\n"
+        response += "00. End session"
+
+    elif text.split('*')[-1] == '00':
+        save = text.split('*')
+        data.append(save)
+        print(save)
+        func()
+        response = "END Thank you for using HealthRader\n"
+        response += "Data for {} has been captured \n".format(phone)
+        response += "Data for has been captured \n"
+        response += "Remember to call NCDC on \n"
+        response += "080000101010 if you suspect COVID-19."
+
+    return response
 
 

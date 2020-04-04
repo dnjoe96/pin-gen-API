@@ -59,14 +59,14 @@ def second_menu():
 def third_menu():
     response = "Select symptoms\n"
     response += "1. Diarrhea\n"
-    response += "2. Nasal_congestion\n"
-    response += "3. Nausea_or_vomiting\n"
+    response += "2. Nasal congestion\n"
+    response += "3. Nause or vomiting\n"
     response += "4. Hemoptysis\n"
     response += "5. Conjuntival\n"
     response += "6. Meningitis\n"
     response += "7. Constipation\n"
     response += "8. Chest_pain\n"
-    response += "9. Abdominal_Pain"
+    response += "9. Abdominal_Pain\n"
     response += "00. Submit"
     return ussd_proceed(response)
 
@@ -128,7 +128,7 @@ def ussd():
         num = phone
         print(num)
 
-        payloads = {"phone_no": num, "symptoms": final_symptoms}
+        payloads = {"patient_number": num, "provider_number": phone_number, "symptoms": final_symptoms}
         print(payloads)
         requests.post("https://health-radar.herokuapp.com/api/patients", data=payloads)
 
@@ -137,63 +137,55 @@ def ussd():
     if text == "":
         response = get_pin()
         # pin = text.split("*")[0]
-    elif len(text.split("*")[0]) == 4:
-        try:
-            pin = text.split("*")[0]
+    elif len(text) == 4:
 
-            phones = '0' + phone_number[4:]
+        pin = text.split("*")[0]
 
-            # phones = '07062066313'
-            request_headers = {"Authorization": API_KEY}
-            payload = {"phone": phones, "PIN": pin}
-            print(payload)
-            r = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload, headers=request_headers)
-            name = json.loads(r.content)
-            status = name['success']
-            print(status)
+        phones = '0' + phone_number[4:]
 
-            def status_code():
-                if status == True:
-                    return "verifed"
-            very = status_code()
-            print(very)
-            if very:
-                response = display_menu()
-            elif len(text.split("*")) == 11:
-                save = text.split('*')
-                data.append(save)
-                print(save)
-                response = first_menu()
+        # phones = '07062066313'
+        request_headers = {"Authorization": API_KEY}
+        payload = {"phone": phones, "PIN": pin}
+        print(payload)
+        r = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload, headers=request_headers)
+        # name = json.loads(r.content)
+        # status = name['success']
+        # print(status)
 
-            elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
-                save = text.split('*')
-                data.append(save)
-                print(save)
-                response= second_menu()
-            elif text.split('*')[-1] == '0':
-                save = text.split('*')
-                data.append(save)
-                print(save)
-                response = third_menu()
-            elif text.split('*')[-1] == '00':
-                save = text.split('*')
-                data.append(save)
-                print(save)
-                func()
-                saves = data[-1]
-                phones = saves[0]
-                response = "END Thank you for using HealthRadar\n"
-                response += "Data for {} has been captured \n".format(phones)
-                response += "Remember to call NCDC on \n"
-                response += "0800 9700 0010 if you suspect COVID-19."
+        if json.loads(r.content)['success'] is False:
+            response = "END Thank you for using HealthRadar\n"
+            response += "You have entered an invalid number."
+        # if very:
+        response = display_menu()
+    elif len(text.split("*")[1]) == 11:
+        save = text.split('*')[1]
+        data.append(save)
+        print(save)
+        response = first_menu()
 
-            else:
-                response = "END Invalid PIN"
+    elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
+        save = text.split('*')
+        data.append(save)
+        print(save)
+        response= second_menu()
 
-        except IndexError:
-            response = get_pin()
-    else:
-        response = "END Invalid Input"
+    elif text.split('*')[-1] == '0':
+        save = text.split('*')
+        data.append(save)
+        print(save)
+        response = third_menu()
+
+    elif text.split('*')[-1] == '00':
+        save = text.split('*')
+        data.append(save)
+        print(save)
+        func()
+        saves = data[-1]
+        phones = saves[0]
+        response = "END Thank you for using HealthRadar\n"
+        response += "Data for {} has been captured \n".format(phones)
+        response += "Remember to call NCDC on \n"
+        response += "0800 9700 0010 if you suspect COVID-19."
 
     resp = make_response(response, 200)
     resp.headers["Content-type"] = "text/plain"
