@@ -173,7 +173,7 @@ def ussd():
         resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
                           headers=request_headers)
 
-        if resp.status_code is 200:
+        if resp.status_code is not 200:
             response = "END Thank you for using HealthRadar\n"
             response += "You have entered an invalid number."
 
