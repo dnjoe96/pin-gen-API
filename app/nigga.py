@@ -77,15 +77,16 @@ API_KEY = 'healthradar-95302420205yeeyqz'
 @app.route('/ussd', methods=['GET', 'POST'])
 def ussd():
     global response
-    session_id = request.values.get("sessionId",None)
-    service_code = request.values.get("serviceCode",None)
+    session_id = request.values.get("sessionId", None)
+    service_code = request.values.get("serviceCode", None)
     # phone_number = request.values.get("phoneNumber",None)
     phone_number = '+2349018858924'
     text = request.values.get("text", "default")
 
     def_symptoms = ["fever", "dry_cough", "myalgia_or_arthralgia", "fatgue", "sputum_production",
                     "shortness_of_breath", "sore_throat", "headache", "chills", "diarrhea", "nasal_congestion",
-                    "nausea_or_vomiting", "hemoptysis", "conjuntival", "meningitis", "constipation", "chest_pain", "abdominal_pain"]
+                    "nausea_or_vomiting", "hemoptysis", "conjuntival", "meningitis", "constipation", "chest_pain",
+                    "abdominal_pain"]
     symptoms = []
     data = []
 
@@ -111,7 +112,6 @@ def ussd():
             for i in second_selection:
                 sel.append(int(i) + 9)
             final_selection = first_selection + sel
-
 
         # print(final_selection)
         for i in final_selection:
@@ -150,7 +150,8 @@ def ussd():
         request_headers = {"Authorization": API_KEY}
         payload = {"phone": phones, "PIN": pin}
         print(payload)
-        r = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload, headers=request_headers)
+        r = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
+                          headers=request_headers)
         # name = json.loads(r.content)
         # status = name['success']
         # print(status)
@@ -179,7 +180,7 @@ def ussd():
         save = text.split('*')
         data.append(save)
         print(save)
-        response= second_menu()
+        response = second_menu()
 
     elif text.split('*')[-1] == '0':
         save = text.split('*')
@@ -199,6 +200,6 @@ def ussd():
         response += "Remember to call NCDC on \n"
         response += "0800 9700 0010 if you suspect COVID-19."
 
-    # resp = make_response(response, 200)
-    # resp.headers["Content-type"] = "text/plain"
-    return response
+    resp = make_response(response, 200)
+    resp.headers["Content-type"] = "text/plain"
+    return resp
