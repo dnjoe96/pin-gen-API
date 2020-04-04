@@ -94,7 +94,7 @@ def ussd():
         # print(data)
         save = data[-1]
         selection = []
-        phone = save[0]
+        phone = save[1]
 
         for one in save:
             if len(one) != 11 and one != '0' and one != '00':
