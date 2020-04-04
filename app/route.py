@@ -169,8 +169,9 @@ def ussd():
     elif len(text) == 4:
         # 07062066313
         # 7309
+        phones = '0' + phone_number[4:]
         request_headers = {"Authorization": "{}".format(API_KEY)}
-        payload = {"phone": phone_number, "PIN": text}
+        payload = {"phone": phones, "PIN": text}
         print(payload)
 
         resp = requests.post('https://healthradarapp.herokuapp.com/api/v1/user/verify', data=payload,
