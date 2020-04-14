@@ -480,7 +480,8 @@ def medic():
             response += "Remember to call NCDC on \n"
             response += "0800 9700 0010 if you suspect COVID-19."
 
-    except IndexError:
+    except IndexError as e:
+        print(e)
         response = "END Wrong response recieved"
 
     resp = make_response(response, 200)
