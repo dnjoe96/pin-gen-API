@@ -218,7 +218,7 @@ bk_cds = [
 
 
 @app.route('/medic', methods=['GET', 'POST'])
-def ussd():
+def medic():
     global response
     session_id = request.values.get("sessionId", None)
     service_code = request.values.get("serviceCode", None)
