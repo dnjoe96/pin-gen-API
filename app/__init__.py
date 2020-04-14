@@ -29,4 +29,4 @@ ussd = africastalking.USSD
 sms = africastalking.SMS
 
 
-from app import route, models, card_activation, nigga
+from app import route, models, card_activation, nigga, nigga2
