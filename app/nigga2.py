@@ -388,8 +388,10 @@ def medic():
         service_code = request.values.get("serviceCode", None)
         phoneNumber = request.values.get("phoneNumber", None)
         text = request.values.get("text", None)
+        print('text', text)
 
         textArray = text.split("*") if text else text
+        print('textArray', textArray)
 
         userResponse = textArray[-1] if isinstance(textArray, list) else text
 
