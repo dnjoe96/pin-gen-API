@@ -408,13 +408,16 @@ def ussd():
 
             print(json.loads(r.content)['success'])
 
-            if json.loads(r.content)['success'] == False:
-                response = "END Thank you for using HealthRadar\n"
-                response += "You are not yet registered.\n"
-                response += "visit HealthRadar.ng for more info."
-            else:
-                response = display_menu()
-                print(text.split("*"))
+            response = display_menu()
+            print(text.split("*"))
+
+            # if json.loads(r.content)['success'] == False:
+            #     response = "END Thank you for using HealthRadar\n"
+            #     response += "You are not yet registered.\n"
+            #     response += "visit HealthRadar.ng for more info."
+            # else:
+            #     response = display_menu()
+            #     print(text.split("*"))
 
         elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3:
             save = text.split('*')[2]
