@@ -1,15 +1,11 @@
 from flask import Flask, request, make_response
 import requests, json
-from config import Config
 from flask_pymongo import PyMongo
 from datetime import datetime, date
 import africastalking
 import os
+from app import app
 
-app = Flask(__name__)
-#
-# username = os.environ.get('username')
-# api_key = os.environ.get('api_key')
 
 PAYSTACK_AUTHORIZATION_KEY = 'sk_test_5eeb6cdd6ab278395a83868075660798028f62f0'
 
@@ -17,8 +13,6 @@ PAYSTACK_AUTHORIZATION_KEY = 'sk_test_5eeb6cdd6ab278395a83868075660798028f62f0'
 
 # sms = africastalking.SMS
 
-app.config.from_object(Config)
-# db = SQLAlchemy(app)
 mongo = PyMongo(app)
 # redis = FlaskRedis()
 pin_error = "END Invalid PIN"
