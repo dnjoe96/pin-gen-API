@@ -460,6 +460,7 @@ def ussd():
             response += "Data for {} has been captured \n".format(phones)
             response += "Remember to call NCDC on \n"
             response += "0800 9700 0010 if you suspect COVID-19."
+
     except IndexError:
         response = "END Wrong response recieved"
 
