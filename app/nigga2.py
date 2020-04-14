@@ -390,7 +390,7 @@ def medic():
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
             response = depo()
-        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2:
+        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and ('00' not in text.split("*")):
 
             pin = text.split("*")[1]
 
@@ -415,7 +415,7 @@ def medic():
             #     response = display_menu()
             #     print(text.split("*"))
 
-        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3:
+        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")):
             save = text.split('*')[2]
             data.append(save)
             print(save)
@@ -427,7 +427,7 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00':
+        elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")):
             save = text.split('*')
             data.append(save)
             print(save)
