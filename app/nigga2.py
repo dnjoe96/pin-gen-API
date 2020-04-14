@@ -228,10 +228,6 @@ def medic():
                     "shortness_of_breath", "sore_throat", "headache", "chills", "diarrhea", "nasal_congestion",
                     "nausea_or_vomiting", "hemoptysis", "conjuntival", "meningitis", "constipation", "chest_pain",
                     "abdominal_pain"]
-    symptoms = []
-    data = []
-    travel = []
-    contact =[]
 
     def depo():
         session_id = request.values.get("sessionId", None)
@@ -334,6 +330,11 @@ def medic():
         resp = make_response(menu, 200)
         resp.headers["Content-type"] = "text/plain"
         return resp
+
+    symptoms = []
+    data = []
+    travel = []
+    contact = []
 
     def func():
         global phone
