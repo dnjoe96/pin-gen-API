@@ -459,7 +459,7 @@ def medic():
             else:
                 traveled_out = 2
             travel.append(traveled_out)
-
+            print(travel)
             response = "CON you near person way get COVID?\n"
             response += "1. Yes\n2. No"
 
@@ -472,7 +472,7 @@ def medic():
                 close_contact = 2
             contact.append(close_contact)
 
-            print(contact, travel)
+            print(contact)
             func()
             saves = data[-1]
             phones = saves[1]
