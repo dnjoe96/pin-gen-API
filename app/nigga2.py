@@ -338,8 +338,9 @@ def medic():
 
     def func():
         global phone
-        # print(data)
+        print('data', data)
         save = data[-1]
+        print('save', save)
         selection = []
         phone = save[1]
 
