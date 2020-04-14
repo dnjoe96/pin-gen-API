@@ -7,15 +7,15 @@ import africastalking
 import os
 
 app = Flask(__name__)
-
-username = os.environ.get('username')
-api_key = os.environ.get('api_key')
+#
+# username = os.environ.get('username')
+# api_key = os.environ.get('api_key')
 
 PAYSTACK_AUTHORIZATION_KEY = 'sk_test_5eeb6cdd6ab278395a83868075660798028f62f0'
 
-africastalking.initialize(username, api_key)
+# africastalking.initialize(username, api_key)
 
-sms = africastalking.SMS
+# sms = africastalking.SMS
 
 app.config.from_object(Config)
 # db = SQLAlchemy(app)
