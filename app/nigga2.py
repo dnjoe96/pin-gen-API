@@ -472,6 +472,7 @@ def medic():
                 close_contact = 2
             contact.append(close_contact)
 
+            print(contact, travel)
             func()
             saves = data[-1]
             phones = saves[1]
