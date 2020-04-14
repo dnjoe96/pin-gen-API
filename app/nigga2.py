@@ -342,13 +342,13 @@ def medic():
         save = data[-1]
         print('save', save)
         selection = []
-        phone = save[1]
+        phone = save[2]
 
         for one in save:
             if len(one) != 11 and one != '0' and one != '00':
                 selection.append(one)
 
-        selections = selection[1:]
+        selections = selection[2:]
 
         if len(selections) == 1:
             final_selection = list(selections[0])
@@ -419,7 +419,6 @@ def medic():
 
         elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')[2]
-            data.append(save)
             print(save)
 
             # this layer ensures that the phone number is correct, else error
@@ -431,7 +430,6 @@ def medic():
 
         elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
-            data.append(save)
             print(save)
 
             # this layer ensures that the phone number is correct, else error
@@ -443,20 +441,17 @@ def medic():
 
         elif text.split('*')[-1] == '0':
             save = text.split('*')
-            data.append(save)
             print(save)
             response = third_menu()
 
         elif text.split('*')[-1] == '00':
             save = text.split('*')
-            data.append(save)
             print(save)
             response = "CON you don travel b4?\n"
             response += "1. Yes\n2. No"
 
         elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
             save = text.split('*')
-            # data.append(save)
             print(save)
             if text.split('*')[-1] == "1":
                 traveled_out = 1
