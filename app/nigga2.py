@@ -230,6 +230,8 @@ def medic():
                     "abdominal_pain"]
     symptoms = []
     data = []
+    travel = []
+    contact =[]
 
     def depo():
         session_id = request.values.get("sessionId", None)
@@ -445,8 +447,28 @@ def medic():
 
         elif text.split('*')[-1] == '00':
             save = text.split('*')
-            data.append(save)
             print(save)
+            response = "CON you don travel b4?\n"
+            response += "1. Yes\n2. No"
+
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
+            if text.split('*')[-1] == "1":
+                traveled_out = 1
+            else:
+                traveled_out = 2
+            travel.append(traveled_out)
+
+            response = "CON you near person way get COVID?\n"
+            response += "1. Yes\n2. No"
+
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
+
+            if text.split('*')[-1] == "1":
+                close_contact = 1
+            else:
+                close_contact = 2
+            contact.append(close_contact)
+
             func()
             saves = data[-1]
             phones = saves[1]
