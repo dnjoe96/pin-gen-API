@@ -415,7 +415,7 @@ def medic():
             #     response = display_menu()
             #     print(text.split("*"))
 
-        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")):
+        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')[2]
             data.append(save)
             print(save)
@@ -427,7 +427,7 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")):
+        elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             data.append(save)
             print(save)
@@ -452,6 +452,8 @@ def medic():
             response += "1. Yes\n2. No"
 
         elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
+            save = text.split('*')
+            print(save)
             if text.split('*')[-1] == "1":
                 traveled_out = 1
             else:
@@ -462,7 +464,8 @@ def medic():
             response += "1. Yes\n2. No"
 
         elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
-
+            save = text.split('*')
+            print(save)
             if text.split('*')[-1] == "1":
                 close_contact = 1
             else:
