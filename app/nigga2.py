@@ -449,12 +449,14 @@ def medic():
 
         elif text.split('*')[-1] == '00':
             save = text.split('*')
+            data.append(save)
             print(save)
             response = "CON you don travel b4?\n"
             response += "1. Yes\n2. No"
 
         elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
             save = text.split('*')
+            # data.append(save)
             print(save)
             if text.split('*')[-1] == "1":
                 traveled_out = 1
@@ -467,6 +469,7 @@ def medic():
 
         elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
             save = text.split('*')
+            data.append(save)
             print(save)
             if text.split('*')[-1] == "1":
                 close_contact = 1
