@@ -461,7 +461,7 @@ def medic():
         #     print(save)
         #     response = second_menu1()
 
-        elif text.split("*")[0] == '2' and (len(text.split("*")) == 2 or text.split('*')[1] == '0'):
+        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and (len(text.split("*")) == 2 or text.split('*')[1] == '0'):
             save = text.split('*')
             print(save)
             response = third_menu1()
