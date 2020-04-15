@@ -378,8 +378,8 @@ def medic():
         print(final_symptoms)
 
         # here is the phone number entered
-        patient_number = phone if len(save[0]) == 11 else phones
-        provider_number = '0' + phone_number[4:] if len(save[0]) == 11 else phones
+        patient_number = phone if len(save[2]) == 11 else phones
+        provider_number = '0' + phone_number[4:] if len(save[2]) == 11 else phones
 
         payloads = {"patient_number": patient_number, "provider_number": provider_number, "symptoms": final_symptoms}
         print(payloads)
