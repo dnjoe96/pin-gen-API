@@ -25,7 +25,7 @@ def cur_time_and_date():
     today = date.today()
     d2 = today.strftime("%B %d, %Y")
     tm = now.strftime("%H:%M:%S")
-    return d2 + ' ' + 'at' + ' ' + tm
+    return (d2 + ' ' + 'at' + ' ' + tm)
 
 
 def ussd_proceed(response):
@@ -47,11 +47,10 @@ def get_pin():
 
 
 def welcome():
-    response = 'Welcome to Instant Deposit Ltd.\n'
-    response += 'For self-test, dial*347*61*0#\n'
-    response += 'For HealthRadar, dial *347*61*1#\n'
-    response += 'To deposit cash to any account, \n'
-    response += 'dial *347*61*PIN*ACCT-NO*BANK-CODE#'
+    response = "Welcome to HealthRadar, the public health "
+    response += "surveillance and early warning system.\n"
+    response += "+health workers, dial *347*61*1#\n"
+    response += "+dial *347*61*2# for COVID-19 self-test"
     return ussd_stop(response)
 
 
@@ -70,7 +69,7 @@ def display_menu():
 
 
 def first_menu():
-    response = "Select symptoms\n"
+    response = "Select symptoms (example: 147)\n"
     response += "1. Fever\n"
     response += "2. Dry cough\n"
     response += "3. Myalgia or Arthralgia\n"
@@ -86,7 +85,7 @@ def first_menu():
 
 
 def second_menu():
-    response = "Select symptoms\n"
+    response = "Select symptoms (example: 147)\n"
     response += "1. Fever\n"
     response += "2. Dry cough\n"
     response += "3. Myalgia or Arthralgia\n"
@@ -102,7 +101,7 @@ def second_menu():
 
 
 def third_menu():
-    response = "Select symptoms\n"
+    response = "Select symptoms (example: 147)\n"
     response += "1. Diarrhea\n"
     response += "2. Nasal congestion\n"
     response += "3. Nause or vomiting\n"
@@ -113,6 +112,56 @@ def third_menu():
     response += "8. Chest pain\n"
     response += "9. Abdominal Pain\n"
     response += "00. Submit"
+    return ussd_proceed(response)
+
+
+def first_menu1():
+    response = "Step 1 of 3\n"
+    response += "Select symptoms (example: 147)\n"
+    response += "1. Fever\n"
+    response += "2. Dry cough\n"
+    response += "3. Cold\n"
+    response += "4. Fatigue\n"
+    response += "5. Sputum production\n"
+    response += "6. Shortness of breath\n"
+    response += "7. Sore throat\n"
+    response += "8. Headache\n"
+    response += "9. Chills\n"
+    response += "0. More Symptoms\n"
+    # response += "00. Continue"
+    return ussd_proceed(response)
+
+
+def second_menu1():
+    response = "Step 1 of 3\n"
+    response += "Select symptoms (example: 147)\n"
+    response += "1. Fever\n"
+    response += "2. Dry cough\n"
+    response += "3. Cold\n"
+    response += "4. Fatigue\n"
+    response += "5. Sputum production\n"
+    response += "6. Shortness of breath\n"
+    response += "7. Sore throat\n"
+    response += "8. Headache\n"
+    response += "9. Chills\n"
+    # response += "0. More Symptoms\n"
+    response += "0. Continue"
+    return ussd_proceed(response)
+
+
+def third_menu1():
+    response = "Step 1 of 3\n"
+    response += "Select symptoms (example: 147)\n"
+    response += "1. Diarrhea\n"
+    response += "2. Nasal congestion\n"
+    response += "3. Nause or vomiting\n"
+    response += "4. Hemoptysis\n"
+    response += "5. Conjuntival\n"
+    response += "6. Meningitis\n"
+    response += "7. Constipation\n"
+    response += "8. Chest pain\n"
+    response += "9. Abdominal Pain\n"
+    # response += "00. Submit"
     return ussd_proceed(response)
 
 
@@ -352,7 +401,6 @@ def medic():
         else:
             selections = selection[1:]
 
-
         if len(selections) == 1:
             final_selection = list(selections[0])
         else:
@@ -386,9 +434,8 @@ def medic():
 
         requests.post("https://health-radar.herokuapp.com/api/patients", data=payloads)
 
+        # the phone number to pass into the Response
 
-
-    # the phone number to pass into the Response
     try:
 
         if text == "":
@@ -396,28 +443,28 @@ def medic():
         elif text == "1":
             response = get_pin()
         elif text == "2":
-            response = first_menu()  # to self help
+            response = first_menu1()  # to self help
 
 
         ##### This block handles self service ############
-        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and ('00' not in text.split("*")) and (
-                '0' not in text.split("*")):
+        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
-            response = first_menu()
+            # response = second_menu1()
+            response = first_menu1()
+            # response = third_menu()
 
-        elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and (
-                '00' not in text.split("*")) and ('0' not in text.split("*")):
-            save = text.split('*')
-            print(save)
-            response = second_menu()
+        # elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and (
+        #         '00' not in text.split("*")) and ('0' not in text.split("*")):
+        #     save = text.split('*')
+        #     print(save)
+        #     response = second_menu1()
 
-        elif text.split("*")[0] == '2' and text.split('*')[-1] == '0':
+        elif text.split("*")[0] == '2' and len(text.split("*")) == 3 and text.split('*')[-1] == '0':
             save = text.split('*')
             print(save)
-            response = third_menu()
+            response = third_menu1()
         ######### self help block ends here and hands over to the general system
-
 
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
@@ -437,16 +484,16 @@ def medic():
 
             print(json.loads(r.content)['success'])
 
-            response = display_menu()
-            print(text.split("*"))
+            # response = display_menu()
+            # print(text.split("*"))
 
-            # if json.loads(r.content)['success'] == False:
-            #     response = "END Thank you for using HealthRadar\n"
-            #     response += "You are not yet registered.\n"
-            #     response += "visit HealthRadar.ng for more info."
-            # else:
-            #     response = display_menu()
-            #     print(text.split("*"))
+            if json.loads(r.content)['success'] == False:
+                response = "END Thank you for using HealthRadar\n"
+                response += "You are not yet registered.\n"
+                response += "visit HealthRadar.ng for more info."
+            else:
+                response = display_menu()
+                print(text.split("*"))
 
         elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and (
                 '0' not in text.split("*")):
@@ -491,14 +538,19 @@ def medic():
             response += "Remember to call NCDC on \n"
             response += "0800 9700 0010 if you suspect COVID-19."
 
-        elif text.split('*')[-1] == '00' and text.split('*')[0] == '2':
+        # elif len(text.split("*")) ==2 and text.split('*')[0] == '2':
+
+        elif len(text.split('*')) == 4 and text.split('*')[0] == '2':
+            # elif text.split('*')[0] == '2' and ('00' not in text.split("*")):
             save = text.split('*')
             print(save)
-            response = "CON you don travel b4?\n"
+            response = "CON Step 2 of 3\n"
+            response += "Have you travelled out of Nigeria in the past 2 weeks?\n"
             response += "1. Yes\n2. No"
 
         # self test ending
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00' and text.split('*')[0] == '2':
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 5 and \
+                text.split('*')[0] == '2':
             save = text.split('*')
             print(save)
             if text.split('*')[-1] == "1":
@@ -507,11 +559,13 @@ def medic():
                 traveled_out = 2
             travel.append(traveled_out)
             print(travel)
-            response = "CON you near person way get COVID?\n"
+            response = "CON Step 3 of 3\n"
+            response += "Do you know anyone having high fever, dry cough or difficulty in breathing?\n"
             response += "1. Yes\n2. No"
 
         # self test ending
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00' and text.split('*')[0] == '2':
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 6 and \
+                text.split('*')[0] == '2':
             save = text.split('*')
             data.append(save)
             print(save)
@@ -525,10 +579,9 @@ def medic():
             func(phone_number)
             phones = phone_number
 
-            response = "END Thank you for using HealthRadar\n"
-            response += "Data for {} has been captured \n".format(phones)
-            response += "Remember to call NCDC on \n"
-            response += "0800 9700 0010 if you suspect COVID-19."
+            response = "END Thank you for taking this voluntary test for COVID-19. Remember:\n"
+            response += "+ Always wash your hands with soap and running water\n"
+            response += "+ No gathering"
 
     except IndexError as e:
         print(e)
