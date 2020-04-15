@@ -376,14 +376,17 @@ def medic():
         selection = []
         phone = save[2]
 
-        for one in save:
-            if len(one) != 11 and one != '0' and one != '00':
-                selection.append(one)
-
         if len(save[2]) == 11:
+            for one in save:
+                if len(one) != 11 and one != '0' and one != '00':
+                    selection.append(one)
+
             selections = selection[2:]
         else:
-            selections = selection[1:]
+            selections = save[1]
+
+        print(selection)
+        print(selections)
 
         if len(selections) == 1:
             final_selection = list(selections[0])
@@ -396,17 +399,22 @@ def medic():
             final_selection = first_selection + sel
 
         # print(final_selection)
-        for i in final_selection:
-            symptoms.append(def_symptoms[int(i) - 1])
+        if selections == '0':
+            final_symptoms = 'None'
+        else:
+            symptoms = []
+            for i in final_selection:
+                symptoms.append(def_symptoms[int(i) - 1])
 
-        str1 = ""
+            str1 = ""
 
-        # converting list to string seperated with comma
-        for y in symptoms:
-            str1 += y + ','
+            # converting list to string seperated with comma
+            for y in symptoms:
+                str1 += y + ','
 
-        # here are the final symptoms according to the selection
-        final_symptoms = str1[:-2]
+            # here are the final symptoms according to the selection
+            final_symptoms = str1[:-2]
+
         print(final_symptoms)
 
         # here is the phone number entered
