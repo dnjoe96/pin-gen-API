@@ -448,12 +448,12 @@ def medic():
 
 
         ##### This block handles self service ############
-        elif text.split("*")[0] == '2' and len(text.split("*")) == 2:
-            save = text.split('*')
-            print(save)
-            # response = second_menu1()
-            # response = first_menu1()
-            response = third_menu()
+        # elif text.split("*")[0] == '2' and len(text.split("*")) == 2:
+        #     save = text.split('*')
+        #     print(save)
+        #     # response = second_menu1()
+        #     # response = first_menu1()
+        #     response = third_menu()
 
         # elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and (
         #         '00' not in text.split("*")) and ('0' not in text.split("*")):
@@ -461,7 +461,7 @@ def medic():
         #     print(save)
         #     response = second_menu1()
 
-        elif text.split("*")[0] == '2' and (len(text.split("*")) == 3 or text.split('*')[-1] == '0'):
+        elif text.split("*")[0] == '2' and (len(text.split("*")) == 2 or text.split('*')[1] == '0'):
             save = text.split('*')
             print(save)
             response = third_menu1()
