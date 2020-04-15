@@ -447,21 +447,21 @@ def medic():
         elif text == "0":
             response = first_menu()
 
-        elif text.split("*")[0] == '0' and len(text.split("*")) == 3 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
-            save = text.split('*')
-            print(save)
-            response = first_menu()
+        # elif text.split("*")[0] == '0' and len(text.split("*")) == 2 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        #     save = text.split('*')
+        #     print(save)
+        #     response = first_menu()
 
         elif text.split("*")[0] == '0' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
             response = second_menu()
 
-        # elif text.split('*')[-1] == '0':
-        #     save = text.split('*')
-        #     print(save)
-        #     response = third_menu()
-        #
+        elif text.split("*")[0] == '0' and text.split('*')[-1] == '0':
+            save = text.split('*')
+            print(save)
+            response = third_menu()
+
         # elif text.split('*')[-1] == '00':
         #     save = text.split('*')
         #     print(save)
