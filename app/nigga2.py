@@ -520,7 +520,7 @@ def medic():
                 response = "END Thank you!\n"
                 response += "You have entered an invalid Entry."
 
-        elif text.split('*')[-1] == '0':
+        elif text.split('*')[-1] == '0' and text.split('*')[0] != '2':
             save = text.split('*')
             print(save)
             response = third_menu()
