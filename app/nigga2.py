@@ -383,7 +383,7 @@ def medic():
 
             selections = selection[2:]
         else:
-            selections = save[1]
+            selections = [save[1]]
 
         print(selection)
         print(selections)
@@ -413,7 +413,7 @@ def medic():
                 str1 += y + ','
 
             # here are the final symptoms according to the selection
-            final_symptoms = str1[:-2]
+            final_symptoms = str1[:-1]
 
         print(final_symptoms)
 
