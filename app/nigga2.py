@@ -444,20 +444,20 @@ def medic():
             response = welcome()
         elif text == "1":
             response = get_pin()
-        elif text == "0":
+        elif text == "2":
             response = first_menu()
 
-        elif text.split("*")[0] == '0' and len(text.split("*")) == 2 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
             response = first_menu()
 
-        elif text.split("*")[0] == '0' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
             response = second_menu()
 
-        elif text.split("*")[0] == '0' and text.split('*')[-1] == '0':
+        elif text.split("*")[0] == '2' and text.split('*')[-1] == '0':
             save = text.split('*')
             print(save)
             response = third_menu()
@@ -504,7 +504,7 @@ def medic():
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
             response = depo()
-        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and text.split('*')[0] != '0' and ('00' not in text.split("*")):
+        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and text.split('*')[0] != '2' and ('00' not in text.split("*")):
 
             pin = text.split("*")[1]
 
@@ -540,7 +540,7 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif text.split('*')[-1] != '0' and text.split('*')[0] != '2' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
 
