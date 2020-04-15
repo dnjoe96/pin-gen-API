@@ -504,7 +504,7 @@ def medic():
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
             response = depo()
-        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and ('00' not in text.split("*")):
+        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and text.split('*')[0] != '0' and ('00' not in text.split("*")):
 
             pin = text.split("*")[1]
 
