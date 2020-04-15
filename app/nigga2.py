@@ -6,7 +6,6 @@ import africastalking
 import os
 from app import app
 
-
 PAYSTACK_AUTHORIZATION_KEY = 'sk_test_5eeb6cdd6ab278395a83868075660798028f62f0'
 
 # africastalking.initialize(username, api_key)
@@ -336,7 +335,7 @@ def medic():
     travel = []
     contact = []
 
-    def func():
+    def func(phones):
         global phone
         print('data', data)
         save = data[-1]
@@ -348,7 +347,11 @@ def medic():
             if len(one) != 11 and one != '0' and one != '00':
                 selection.append(one)
 
-        selections = selection[2:]
+        if len(save[2]) == 11:
+            selections = selection[2:]
+        else:
+            selections = selection[1:]
+
 
         if len(selections) == 1:
             final_selection = list(selections[0])
@@ -375,66 +378,14 @@ def medic():
         print(final_symptoms)
 
         # here is the phone number entered
-        patient_number = phone
-        provider_number = '0' + phone_number[4:]
+        patient_number = phone if len(save[0]) == 11 else phones
+        provider_number = '0' + phone_number[4:] if len(save[0]) == 11 else phones
+
         payloads = {"patient_number": patient_number, "provider_number": provider_number, "symptoms": final_symptoms}
         print(payloads)
 
         requests.post("https://health-radar.herokuapp.com/api/patients", data=payloads)
 
-    def test():
-        global response
-        session_id = request.values.get("sessionId", None)
-        service_code = request.values.get("serviceCode", None)
-        phoneNumber = request.values.get("phoneNumber", None)
-        text = request.values.get("text", None)
-        print('text', text)
-
-        textArray = text.split("*") if text else text
-        print('textArray', textArray)
-
-        userResponse = textArray[-1] if isinstance(textArray, list) else text
-
-        if userResponse == "0":
-            # main menu
-            response = first_menu()
-            save = text.split('*')
-            print(save)
-        elif text.split('*')[-1] == '00':
-            save = text.split('*')
-            print(save)
-            response = "CON you don travel b4?\n"
-            response += "1. Yes\n2. No"
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
-            save = text.split('*')
-            print(save)
-            if text.split('*')[-1] == "1":
-                traveled_out = 1
-            else:
-                traveled_out = 2
-            travel.append(traveled_out)
-            print(travel)
-            response = "CON you near person way get COVID?\n"
-            response += "1. Yes\n2. No"
-
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
-            save = text.split('*')
-            data.append(save)
-            print(save)
-            if text.split('*')[-1] == "1":
-                close_contact = 1
-            else:
-                close_contact = 2
-            contact.append(close_contact)
-
-            print(contact)
-            func()
-            saves = data[-1]
-            response = "END Thank you for taking the COVID-19 test"
-
-        resp = make_response(response, 200)
-        resp.headers["Content-type"] = "text/plain"
-        return resp
 
 
     # the phone number to pass into the Response
@@ -445,14 +396,18 @@ def medic():
         elif text == "1":
             response = get_pin()
         elif text == "2":
-            response = first_menu()
+            response = first_menu()  # to self help
 
-        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+
+        ##### This block handles self service ############
+        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and ('00' not in text.split("*")) and (
+                '0' not in text.split("*")):
             save = text.split('*')
             print(save)
             response = first_menu()
 
-        elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and (
+                '00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
             response = second_menu()
@@ -461,50 +416,14 @@ def medic():
             save = text.split('*')
             print(save)
             response = third_menu()
-
-        # elif text.split('*')[-1] == '00':
-        #     save = text.split('*')
-        #     print(save)
-        #     response = "CON you don travel b4?\n"
-        #     response += "1. Yes\n2. No"
-        #
-        # elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
-        #     save = text.split('*')
-        #     print(save)
-        #     if text.split('*')[-1] == "1":
-        #         traveled_out = 1
-        #     else:
-        #         traveled_out = 2
-        #     travel.append(traveled_out)
-        #     print(travel)
-        #     response = "CON you near person way get COVID?\n"
-        #     response += "1. Yes\n2. No"
-        #
-        # elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
-        #     save = text.split('*')
-        #     data.append(save)
-        #     print(save)
-        #     if text.split('*')[-1] == "1":
-        #         close_contact = 1
-        #     else:
-        #         close_contact = 2
-        #     contact.append(close_contact)
-        #
-        #     print(contact)
-        #     func()
-        #     saves = data[-1]
-        #     phones = saves[1]
-        #     response = "END Thank you for using HealthRadar\n"
-        #     response += "Data for {} has been captured \n".format(phones)
-        #     response += "Remember to call NCDC on \n"
-        #     response += "0800 9700 0010 if you suspect COVID-19."
-
+        ######### self help block ends here and hands over to the general system
 
 
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
             response = depo()
-        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and text.split('*')[0] != '2' and ('00' not in text.split("*")):
+        elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and text.split('*')[0] != '2' and (
+                '00' not in text.split("*")):
 
             pin = text.split("*")[1]
 
@@ -529,7 +448,8 @@ def medic():
             #     response = display_menu()
             #     print(text.split("*"))
 
-        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and (
+                '0' not in text.split("*")):
             save = text.split('*')[2]
             print(save)
 
@@ -540,7 +460,8 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif text.split('*')[-1] != '0' and text.split('*')[0] != '2' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif text.split('*')[-1] != '0' and text.split('*')[0] != '2' and text.split('*')[-1] != '00' and (
+                '00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')
             print(save)
 
@@ -585,9 +506,10 @@ def medic():
             contact.append(close_contact)
 
             print(contact)
-            func()
             saves = data[-1]
-            phones = saves[1]
+            func(phone_number)
+            phones = saves[2] if len(save[2]) == 11 else phone_number
+
             response = "END Thank you for using HealthRadar\n"
             response += "Data for {} has been captured \n".format(phones)
             response += "Remember to call NCDC on \n"
