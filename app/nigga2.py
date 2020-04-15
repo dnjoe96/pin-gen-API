@@ -445,7 +445,62 @@ def medic():
         elif text == "1":
             response = get_pin()
         elif text == "0":
-            response = test()
+            response = first_menu()
+
+        elif text.split("*")[0] == '0' and len(text.split("*")) == 3 and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+            save = text.split('*')[2]
+            print(save)
+            response =first_menu()
+
+        elif text.split("*")[0] == '0' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+            save = text.split('*')
+            print(save)
+            response = second_menu()
+
+        # elif text.split('*')[-1] == '0':
+        #     save = text.split('*')
+        #     print(save)
+        #     response = third_menu()
+        #
+        # elif text.split('*')[-1] == '00':
+        #     save = text.split('*')
+        #     print(save)
+        #     response = "CON you don travel b4?\n"
+        #     response += "1. Yes\n2. No"
+        #
+        # elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
+        #     save = text.split('*')
+        #     print(save)
+        #     if text.split('*')[-1] == "1":
+        #         traveled_out = 1
+        #     else:
+        #         traveled_out = 2
+        #     travel.append(traveled_out)
+        #     print(travel)
+        #     response = "CON you near person way get COVID?\n"
+        #     response += "1. Yes\n2. No"
+        #
+        # elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
+        #     save = text.split('*')
+        #     data.append(save)
+        #     print(save)
+        #     if text.split('*')[-1] == "1":
+        #         close_contact = 1
+        #     else:
+        #         close_contact = 2
+        #     contact.append(close_contact)
+        #
+        #     print(contact)
+        #     func()
+        #     saves = data[-1]
+        #     phones = saves[1]
+        #     response = "END Thank you for using HealthRadar\n"
+        #     response += "Data for {} has been captured \n".format(phones)
+        #     response += "Remember to call NCDC on \n"
+        #     response += "0800 9700 0010 if you suspect COVID-19."
+
+
+
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
             response = depo()
