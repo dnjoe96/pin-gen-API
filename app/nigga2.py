@@ -161,6 +161,7 @@ def third_menu1():
     response += "7. Constipation\n"
     response += "8. Chest pain\n"
     response += "9. Abdominal Pain\n"
+    response += "0. Continue"
     # response += "00. Submit"
     return ussd_proceed(response)
 
@@ -447,12 +448,12 @@ def medic():
 
 
         ##### This block handles self service ############
-        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and ('0' not in text.split("*")):
+        elif text.split("*")[0] == '2' and len(text.split("*")) == 2:
             save = text.split('*')
             print(save)
             # response = second_menu1()
-            response = first_menu1()
-            # response = third_menu()
+            # response = first_menu1()
+            response = third_menu()
 
         # elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and (
         #         '00' not in text.split("*")) and ('0' not in text.split("*")):
@@ -460,7 +461,7 @@ def medic():
         #     print(save)
         #     response = second_menu1()
 
-        elif text.split("*")[0] == '2' and len(text.split("*")) == 3 and text.split('*')[-1] == '0':
+        elif text.split("*")[0] == '2' and (len(text.split("*")) == 3 or text.split('*')[-1] == '0'):
             save = text.split('*')
             print(save)
             response = third_menu1()
@@ -540,7 +541,7 @@ def medic():
 
         # elif len(text.split("*")) ==2 and text.split('*')[0] == '2':
 
-        elif len(text.split('*')) == 4 and text.split('*')[0] == '2':
+        elif len(text.split('*')) == 3 and text.split('*')[0] == '2':
             # elif text.split('*')[0] == '2' and ('00' not in text.split("*")):
             save = text.split('*')
             print(save)
@@ -549,7 +550,7 @@ def medic():
             response += "1. Yes\n2. No"
 
         # self test ending
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 5 and \
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 4 and \
                 text.split('*')[0] == '2':
             save = text.split('*')
             print(save)
@@ -564,7 +565,7 @@ def medic():
             response += "1. Yes\n2. No"
 
         # self test ending
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 6 and \
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 5 and \
                 text.split('*')[0] == '2':
             save = text.split('*')
             data.append(save)
