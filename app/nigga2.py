@@ -127,25 +127,8 @@ def first_menu1():
     response += "7. Sore throat\n"
     response += "8. Headache\n"
     response += "9. Chills\n"
-    response += "0. More Symptoms\n"
+    response += "0. None"
     # response += "00. Continue"
-    return ussd_proceed(response)
-
-
-def second_menu1():
-    response = "Step 1 of 3\n"
-    response += "Select symptoms (example: 147)\n"
-    response += "1. Fever\n"
-    response += "2. Dry cough\n"
-    response += "3. Cold\n"
-    response += "4. Fatigue\n"
-    response += "5. Sputum production\n"
-    response += "6. Shortness of breath\n"
-    response += "7. Sore throat\n"
-    response += "8. Headache\n"
-    response += "9. Chills\n"
-    # response += "0. More Symptoms\n"
-    response += "0. Continue"
     return ussd_proceed(response)
 
 
@@ -446,26 +429,49 @@ def medic():
         elif text == "2":
             response = first_menu1()  # to self help
 
-
-        ##### This block handles self service ############
-        # elif text.split("*")[0] == '2' and len(text.split("*")) == 2:
-        #     save = text.split('*')
-        #     print(save)
-        #     # response = second_menu1()
-        #     # response = first_menu1()
-        #     response = third_menu()
-
-        # elif text.split("*")[0] == '2' and text.split('*')[-1] != '0' and text.split('*')[-1] != '00' and (
-        #         '00' not in text.split("*")) and ('0' not in text.split("*")):
-        #     save = text.split('*')
-        #     print(save)
-        #     response = second_menu1()
-
-        elif text.split("*")[0] == '2' and len(text.split("*")) == 2 and (len(text.split("*")) == 2 or text.split('*')[1] == '0'):
+        elif len(text.split('*')) == 2 and text.split('*')[0] == '2':
+            # elif text.split('*')[0] == '2' and ('00' not in text.split("*")):
             save = text.split('*')
             print(save)
-            response = third_menu1()
-        ######### self help block ends here and hands over to the general system
+            response = "CON Step 2 of 3\n"
+            response += "Have you travelled out of Nigeria in the past 2 weeks?\n"
+            response += "1. Yes\n2. No"
+
+        # self test ending
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 3 and \
+                text.split('*')[0] == '2':
+            save = text.split('*')
+            print(save)
+            if text.split('*')[-1] == "1":
+                traveled_out = 1
+            else:
+                traveled_out = 2
+            travel.append(traveled_out)
+            print(travel)
+            response = "CON Step 3 of 3\n"
+            response += "Do you know anyone having high fever, dry cough or difficulty in breathing?\n"
+            response += "1. Yes\n2. No"
+
+        # self test ending
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 4 and \
+                text.split('*')[0] == '2':
+            save = text.split('*')
+            data.append(save)
+            print(save)
+            if text.split('*')[-1] == "1":
+                close_contact = 1
+            else:
+                close_contact = 2
+            contact.append(close_contact)
+
+            print(contact)
+            func(phone_number)
+            phones = phone_number
+
+            response = "END Thank you for taking this voluntary test for COVID-19. Remember:\n"
+            response += "+ Always wash your hands with soap and running water\n"
+            response += "+ No gathering"
+
 
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
@@ -485,16 +491,16 @@ def medic():
 
             print(json.loads(r.content)['success'])
 
-            # response = display_menu()
-            # print(text.split("*"))
+            response = display_menu()
+            print(text.split("*"))
 
-            if json.loads(r.content)['success'] == False:
-                response = "END Thank you for using HealthRadar\n"
-                response += "You are not yet registered.\n"
-                response += "visit HealthRadar.ng for more info."
-            else:
-                response = display_menu()
-                print(text.split("*"))
+            # if json.loads(r.content)['success'] == False:
+            #     response = "END Thank you for using HealthRadar\n"
+            #     response += "You are not yet registered.\n"
+            #     response += "visit HealthRadar.ng for more info."
+            # else:
+            #     response = display_menu()
+            #     print(text.split("*"))
 
         elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and (
                 '0' not in text.split("*")):
@@ -540,49 +546,6 @@ def medic():
             response += "0800 9700 0010 if you suspect COVID-19."
 
         # elif len(text.split("*")) ==2 and text.split('*')[0] == '2':
-
-        elif len(text.split('*')) == 3 and text.split('*')[0] == '2':
-            # elif text.split('*')[0] == '2' and ('00' not in text.split("*")):
-            save = text.split('*')
-            print(save)
-            response = "CON Step 2 of 3\n"
-            response += "Have you travelled out of Nigeria in the past 2 weeks?\n"
-            response += "1. Yes\n2. No"
-
-        # self test ending
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 4 and \
-                text.split('*')[0] == '2':
-            save = text.split('*')
-            print(save)
-            if text.split('*')[-1] == "1":
-                traveled_out = 1
-            else:
-                traveled_out = 2
-            travel.append(traveled_out)
-            print(travel)
-            response = "CON Step 3 of 3\n"
-            response += "Do you know anyone having high fever, dry cough or difficulty in breathing?\n"
-            response += "1. Yes\n2. No"
-
-        # self test ending
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 5 and \
-                text.split('*')[0] == '2':
-            save = text.split('*')
-            data.append(save)
-            print(save)
-            if text.split('*')[-1] == "1":
-                close_contact = 1
-            else:
-                close_contact = 2
-            contact.append(close_contact)
-
-            print(contact)
-            func(phone_number)
-            phones = phone_number
-
-            response = "END Thank you for taking this voluntary test for COVID-19. Remember:\n"
-            response += "+ Always wash your hands with soap and running water\n"
-            response += "+ No gathering"
 
     except IndexError as e:
         print(e)
