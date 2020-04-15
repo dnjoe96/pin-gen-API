@@ -477,13 +477,28 @@ def medic():
             print(save)
             response = third_menu()
 
-        elif text.split('*')[-1] == '00':
+        elif text.split('*')[-1] == '00' and text.split('*')[0] != '2':
+            save = text.split('*')
+            data.append(save)
+
+            saves = data[-1]
+
+            func(phone_number)
+            phones = saves[2]
+
+            response = "END Thank you for using HealthRadar\n"
+            response += "Data for {} has been captured \n".format(phones)
+            response += "Remember to call NCDC on \n"
+            response += "0800 9700 0010 if you suspect COVID-19."
+
+        elif text.split('*')[-1] == '00' and text.split('*')[0] == '2':
             save = text.split('*')
             print(save)
             response = "CON you don travel b4?\n"
             response += "1. Yes\n2. No"
 
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00':
+        # self test ending
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-2] == '00' and text.split('*')[0] == '2':
             save = text.split('*')
             print(save)
             if text.split('*')[-1] == "1":
@@ -495,7 +510,8 @@ def medic():
             response = "CON you near person way get COVID?\n"
             response += "1. Yes\n2. No"
 
-        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00':
+        # self test ending
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and text.split('*')[-3] == '00' and text.split('*')[0] == '2':
             save = text.split('*')
             data.append(save)
             print(save)
@@ -506,9 +522,8 @@ def medic():
             contact.append(close_contact)
 
             print(contact)
-            saves = data[-1]
             func(phone_number)
-            phones = saves[2] if len(save[2]) == 11 else phone_number
+            phones = phone_number
 
             response = "END Thank you for using HealthRadar\n"
             response += "Data for {} has been captured \n".format(phones)
