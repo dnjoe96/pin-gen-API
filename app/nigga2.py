@@ -435,7 +435,18 @@ def medic():
         patient_number = phone if len(save[2]) == 11 else phones
         provider_number = '0' + phone_number[4:] if len(save[2]) == 11 else phones
 
-        payloads = {"patient_number": patient_number, "provider_number": provider_number, "symptoms": final_symptoms}
+        contact_check = contact[0]
+        travel_check = travel[0]
+
+
+
+        payloads = {
+            "patient_number": patient_number,
+            "provider_number": provider_number,
+            "symptoms": final_symptoms,
+            "close_contact": contact_check,
+            "traveled_out": travel_check
+        }
         print(payloads)
 
         requests.post("https://health-radar.herokuapp.com/api/patients", data=payloads)
@@ -466,12 +477,7 @@ def medic():
                 text.split('*')[0] == '2':
             save = text.split('*')
             print(save)
-            if text.split('*')[-1] == "1":
-                traveled_out = 1
-            else:
-                traveled_out = 2
-            travel.append(traveled_out)
-            print(travel)
+
             response = "CON Step 3 of 3\n"
             response += "Do you know anyone having high fever, dry cough or difficulty in breathing?\n"
             response += "1. Yes\n2. No"
@@ -488,7 +494,14 @@ def medic():
                 close_contact = 2
             contact.append(close_contact)
 
+            if text.split('*')[-2] == "1":
+                traveled_out = 1
+            else:
+                traveled_out = 2
+            travel.append(traveled_out)
+
             print(contact)
+            print(travel)
             func(phone_number)
             phones = phone_number
 
