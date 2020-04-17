@@ -498,9 +498,8 @@ def medic():
             data.append(save)
             print(save)
 
-            response = "END Thank you for taking this voluntary test for COVID-19. Remember:\n"
-            response += "+ Always wash your hands with soap and running water\n"
-            response += "+ No gathering"
+            response = "END Thank you for taking this voluntary test for COVID-19. error"
+
 
         ###################################### End self test #########################################
 
