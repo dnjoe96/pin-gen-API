@@ -131,6 +131,20 @@ def first_menu1():
     # response += "00. Continue"
     return ussd_proceed(response)
 
+def hausa_menu():
+    response = "Shashi na 1 cikin 3\n"
+    response += "Zabi alamonin da kake ajikin kaa yanzu (misali: zabi numba data face daga 1 zuwa 0)\n"
+    response += "1. Zazzabi\n"
+    response += "2. Tari da bushwewar makogaro\n"
+    response += "3. Mura\n"
+    response += "4. Ciwon Jiki\n"
+    response += "5. Daukewar numfashi\n"
+    response += "6. Ciwon Kai\n"
+    response += "7. Babu Ko wanne\n"
+    response += "0. None"
+    # response += "00. Continue"
+    return ussd_proceed(response)
+
 
 def third_menu1():
     response = "Step 1 of 3\n"
@@ -492,6 +506,64 @@ def medic():
 
 
         ###################################### End self test #########################################
+
+        ############################## Hausa Test start ########################################
+
+        elif text == "3":
+            response = first_menu1()  # to self help
+
+        elif len(text.split('*')) == 2 and text.split('*')[0] == '3':
+            # elif text.split('*')[0] == '2' and ('00' not in text.split("*")):
+            save = text.split('*')
+            print(save)
+            response = "CON Shashi na 2 cikin 3\n"
+            response += "Shin kayi tafiya zuwa kashashen waje a cikin sati biyu da suka wuce?\n"
+            response += "1. E\n2. A'a"
+
+        # self test ending
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 3 and \
+                text.split('*')[0] == '3':
+            save = text.split('*')
+            print(save)
+            if text.split('*')[-1] == "1":
+                traveled_out = 1
+            else:
+                traveled_out = 2
+            travel.append(traveled_out)
+            print(travel)
+            response = "CON Shashi na 3 cikin 3\n"
+            response += "Ko kasan wani da yake dauke da zazzabi ma zafi, ko tari, ko Kuma yake samun matsalar yin numfashi?\n"
+            response += "1. E\n2. A'a"
+
+        # self test ending
+        elif (text.split('*')[-1] == "1" or text.split('*')[-1] == "2") and len(text.split('*')) == 4 and \
+                text.split('*')[0] == '3':
+            save = text.split('*')
+            data.append(save)
+            print(save)
+            if text.split('*')[-1] == "1":
+                close_contact = 1
+            else:
+                close_contact = 2
+            contact.append(close_contact)
+
+            print(contact)
+            func(phone_number)
+            phones = phone_number
+
+            response = "END Mungode da tuntubarmu. Zamu nemeka idan akwai hukatar hakan.\n"
+            response += "+ Tabbata Ka wanke hannuka da sabulu da kuma ruwa mai gudana\n"
+            response += "+ Guji hallartar guraren dake da sama da mutane goma"
+
+        elif (text.split('*')[-1] != "1" or text.split('*')[-1] != '2' or text.split('*')[-1] != '0') and \
+                text.split('*')[0] == '3':
+            save = text.split('*')
+            data.append(save)
+            print(save)
+
+            response = "END Thank you for taking this voluntary test for COVID-19. error"
+
+        ############################ Hausa Test End ######################################
 
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
