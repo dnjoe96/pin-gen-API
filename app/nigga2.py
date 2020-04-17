@@ -510,7 +510,16 @@ def medic():
         ############################## Hausa Test start ########################################
 
         elif text == "3":
-            response = first_menu1()  # to self help
+            response = "CON Shashi na 1 cikin 3\n"
+            response += "Zabi alamonin da kake ajikin kaa yanzu (misali: zabi numba data face daga 1 zuwa 0)\n"
+            response += "1. Zazzabi\n"
+            response += "2. Tari da bushwewar makogaro\n"
+            response += "3. Mura\n"
+            response += "4. Ciwon Jiki\n"
+            response += "5. Daukewar numfashi\n"
+            response += "6. Ciwon Kai\n"
+            response += "7. Babu Ko wanne\n"
+            response += "0. None"
 
         elif len(text.split('*')) == 2 and text.split('*')[0] == '3':
             # elif text.split('*')[0] == '2' and ('00' not in text.split("*")):
