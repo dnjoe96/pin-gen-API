@@ -447,7 +447,7 @@ def medic():
             response += "Have you travelled out of Nigeria in the past 2 weeks?\n"
             response += "1. Yes\n2. No"
 
-            if (text.split('*')[-1] != '1' or text.split('*')[-1] != '2') and text.split('*')[0] == '0':
+            if (text.split('*')[-1] != '1' or text.split('*')[-1] != '2') and text.split('*')[0] == '2':
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
@@ -466,7 +466,7 @@ def medic():
             response += "Do you know anyone having high fever, dry cough or difficulty in breathing?\n"
             response += "1. Yes\n2. No"
 
-            if (text.split('*')[-1] != '1' or text.split('*')[-1] != '2') and text.split('*')[0] == '0':
+            if (text.split('*')[-1] != '1' or text.split('*')[-1] != '2') and text.split('*')[0] == '2':
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
