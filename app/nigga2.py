@@ -72,31 +72,16 @@ def first_menu():
     response = "Select symptoms (example: 147)\n"
     response += "1. Fever\n"
     response += "2. Dry cough\n"
-    response += "3. Myalgia or Arthralgia\n"
+    response += "3. Cold\n"
     response += "4. Fatigue\n"
-    response += "5. Sputum production\n"
+    response += "5. Headache\n"
+    # response += "5. Sputum production\n"
     response += "6. Shortness of breath\n"
     response += "7. Sore throat\n"
-    response += "8. Headache\n"
-    response += "9. Chills\n"
+    # response += "8. Headache\n"
+    # response += "9. Chills\n"
     response += "0. More Symptoms\n"
     # response += "00. Submit"
-    return ussd_proceed(response)
-
-
-def second_menu():
-    response = "Select symptoms (example: 147)\n"
-    response += "1. Fever\n"
-    response += "2. Dry cough\n"
-    response += "3. Myalgia or Arthralgia\n"
-    response += "4. Fatigue\n"
-    response += "5. Sputum production\n"
-    response += "6. Shortness of breath\n"
-    response += "7. Sore throat\n"
-    response += "8. Headache\n"
-    response += "9. Chills\n"
-    response += "0. More Symptoms\n"
-    response += "00. Submit"
     return ussd_proceed(response)
 
 
@@ -109,8 +94,8 @@ def third_menu():
     response += "5. Conjuntival\n"
     response += "6. Meningitis\n"
     response += "7. Constipation\n"
-    response += "8. Chest pain\n"
-    response += "9. Abdominal Pain\n"
+    # response += "8. Chest pain\n"
+    # response += "9. Abdominal Pain\n"
     response += "0. None"
     return ussd_proceed(response)
 
@@ -271,10 +256,9 @@ def medic():
 
     sms_phone_number.append(phone_number)
 
-    def_symptoms = ["fever", "dry_cough", "myalgia_or_arthralgia", "fatgue", "sputum_production",
-                    "shortness_of_breath", "sore_throat", "headache", "chills", "diarrhea", "nasal_congestion",
-                    "nausea_or_vomiting", "hemoptysis", "conjuntival", "meningitis", "constipation", "chest_pain",
-                    "abdominal_pain"]
+    def_symptoms = ["fever", "dry_cough", "chills", "fatigue", "headache", "shortness_of_breath", "sore_throat",
+                    "diarrhea", "nasal_congestion", "nausea_or_vomiting", "hemoptysis", "conjuntival",
+                    "meningitis", "constipation", "sputum_production", "chill", "chest_pain", "abdominal_pain"]
 
     def depo():
         session_id = request.values.get("sessionId", None)
@@ -410,7 +394,7 @@ def medic():
             second_selection = selections[1]
             sel = []
             for i in second_selection:
-                sel.append(int(i) + 9)
+                sel.append(int(i) + 7)
             final_selection = first_selection + sel
 
         # print(final_selection)
@@ -617,8 +601,7 @@ def medic():
             #     response = display_menu()
             #     print(text.split("*"))
 
-        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and text.split("*")[0] == '1' \
-                and ('00' not in text.split("*")) and ('0' not in text.split("*")):
+        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and text.split("*")[0] == '1':
             save = text.split('*')[2]
             print(save)
 
@@ -629,12 +612,14 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('00' not in text.split("*")):
+        elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('8' not in list(text.split('*')[-1]))\
+                ('9' not in list(text.split('*')[-1])):
             save = text.split('*')
             print(save)
             response = third_menu()
 
-        elif len(text.split('*')) == 5 and text.split('*')[0] == '1':
+        elif len(text.split('*')) == 5 and text.split('*')[0] == '1' and ('8' not in list(text.split('*')[-1]))\
+                ('9' not in list(text.split('*')[-1])):
             save = text.split('*')
             data.append(save)
 
@@ -648,11 +633,13 @@ def medic():
             response += "Remember to call NCDC on \n"
             response += "0800 9700 0010 if you suspect COVID-19."
 
-        # elif len(text.split("*")) ==2 and text.split('*')[0] == '2':
+        else:
+            response = "END Wrong response recieved"
 
     except IndexError as e:
         print(e)
         response = "END Wrong response recieved"
+        response += "selection not among options"
 
     resp = make_response(response, 200)
     resp.headers["Content-type"] = "text/plain"
