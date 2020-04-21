@@ -435,8 +435,8 @@ def medic():
         patient_number = phone if len(save[2]) == 11 else phones
         provider_number = '0' + phone_number[4:] if len(save[2]) == 11 else phones
 
-        contact_check = contact[0]
-        travel_check = travel[0]
+        contact_check = contact[0] if len(contact) > 0 else None
+        travel_check = travel[0] if len(travel) > 0 else None
 
 
 
