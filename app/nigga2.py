@@ -111,7 +111,7 @@ def third_menu():
     response += "7. Constipation\n"
     response += "8. Chest pain\n"
     response += "9. Abdominal Pain\n"
-    response += "00. None"
+    response += "0. None"
     return ussd_proceed(response)
 
 
@@ -130,6 +130,7 @@ def first_menu1():
     response += "0. None"
     # response += "00. Continue"
     return ussd_proceed(response)
+
 
 def hausa_menu():
     response = "Shashi na 1 cikin 3\n"
@@ -392,7 +393,7 @@ def medic():
 
         if len(save[2]) == 11:
             for one in save:
-                if len(one) != 11 and one != '0' and one != '00':
+                if len(one) != 11 and one[-1] != '0':
                     selection.append(one)
 
             selections = selection[2:]
@@ -405,7 +406,7 @@ def medic():
         if len(selections) == 1:
             final_selection = list(selections[0])
         else:
-            first_selection = list(selections[0])
+            first_selection = list(selections[0]) if selections[0] != '0' else []
             second_selection = selections[1]
             sel = []
             for i in second_selection:
@@ -437,8 +438,6 @@ def medic():
 
         contact_check = contact[0] if len(contact) > 0 else None
         travel_check = travel[0] if len(travel) > 0 else None
-
-
 
         payloads = {
             "patient_number": patient_number,
@@ -629,8 +628,6 @@ def medic():
             else:
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
-
-
 
         elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('00' not in text.split("*")):
             save = text.split('*')
