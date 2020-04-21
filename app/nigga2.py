@@ -612,13 +612,13 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('8' not in list(text.split('*')[-1]))\
+        elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('8' not in list(text.split('*')[-1])) and \
                 ('9' not in list(text.split('*')[-1])):
             save = text.split('*')
             print(save)
             response = third_menu()
 
-        elif len(text.split('*')) == 5 and text.split('*')[0] == '1' and ('8' not in list(text.split('*')[-1]))\
+        elif len(text.split('*')) == 5 and text.split('*')[0] == '1' and ('8' not in list(text.split('*')[-1])) and \
                 ('9' not in list(text.split('*')[-1])):
             save = text.split('*')
             data.append(save)
