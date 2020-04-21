@@ -377,7 +377,7 @@ def medic():
 
         if len(save[2]) == 11:
             for one in save:
-                if len(one) != 11 and one[-1] != '0':
+                if len(one) != 11:
                     selection.append(one)
 
             selections = selection[2:]
@@ -391,7 +391,7 @@ def medic():
             final_selection = list(selections[0])
         else:
             first_selection = list(selections[0]) if selections[0] != '0' else []
-            second_selection = selections[1]
+            second_selection = selections[1] if selections[-1] != '0' else ''
             sel = []
             for i in second_selection:
                 sel.append(int(i) + 7)
