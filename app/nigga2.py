@@ -635,11 +635,11 @@ def medic():
 
         else:
             response = "END Wrong response recieved"
+            response += "selection not among options"
 
     except IndexError as e:
         print(e)
         response = "END Wrong response recieved"
-        response += "selection not among options"
 
     resp = make_response(response, 200)
     resp.headers["Content-type"] = "text/plain"
