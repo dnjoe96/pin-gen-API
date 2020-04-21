@@ -80,7 +80,7 @@ def first_menu():
     response += "8. Headache\n"
     response += "9. Chills\n"
     response += "0. More Symptoms\n"
-    response += "00. Submit"
+    # response += "00. Submit"
     return ussd_proceed(response)
 
 
@@ -111,7 +111,7 @@ def third_menu():
     response += "7. Constipation\n"
     response += "8. Chest pain\n"
     response += "9. Abdominal Pain\n"
-    response += "00. Submit"
+    response += "00. None"
     return ussd_proceed(response)
 
 
@@ -590,6 +590,8 @@ def medic():
         # example when a user pass *384*12745*321344688264392*2090209790*033#
         elif len(text.split("*")[0]) == 15:
             response = depo()
+
+        ####################### HealthRadar for Providers ########################################
         elif len(text.split("*")[1]) == 4 and len(text.split("*")) == 2 and text.split('*')[0] != '2' and (
                 '00' not in text.split("*")):
 
@@ -616,8 +618,8 @@ def medic():
             #     response = display_menu()
             #     print(text.split("*"))
 
-        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and ('00' not in text.split("*")) and (
-                '0' not in text.split("*")):
+        elif len(text.split("*")[2]) == 11 and len(text.split("*")) == 3 and text.split("*")[0] == '1' \
+                and ('00' not in text.split("*")) and ('0' not in text.split("*")):
             save = text.split('*')[2]
             print(save)
 
@@ -628,24 +630,24 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        elif text.split('*')[-1] != '0' and text.split('*')[0] != '2' and text.split('*')[-1] != '00' and (
-                '00' not in text.split("*")) and ('0' not in text.split("*")):
-            save = text.split('*')
-            print(save)
+        # elif text.split('*')[-1] != '0' and text.split('*')[0] != '2' and text.split('*')[-1] != '00' and (
+        #         '00' not in text.split("*")) and ('0' not in text.split("*")):
+        #     save = text.split('*')
+        #     print(save)
+        #
+        #     this layer ensures that the phone number is correct, else error
+            # if len(text.split("*")[2]) == 11:
+            #     response = second_menu()
+            # else:
+            #     response = "END Thank you!\n"
+            #     response += "You have entered an invalid Entry."
 
-            # this layer ensures that the phone number is correct, else error
-            if len(text.split("*")[2]) == 11:
-                response = second_menu()
-            else:
-                response = "END Thank you!\n"
-                response += "You have entered an invalid Entry."
-
-        elif text.split('*')[-1] == '0' and text.split('*')[0] != '2':
+        elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('00' not in text.split("*")):
             save = text.split('*')
             print(save)
             response = third_menu()
 
-        elif text.split('*')[-1] == '00' and text.split('*')[0] != '2':
+        elif len(text.split('*')) == 5 and text.split('*')[0] == '1':
             save = text.split('*')
             data.append(save)
 
