@@ -630,17 +630,7 @@ def medic():
                 response = "END Thank you for using HealthRadar\n"
                 response += "You have entered an invalid number."
 
-        # elif text.split('*')[-1] != '0' and text.split('*')[0] != '2' and text.split('*')[-1] != '00' and (
-        #         '00' not in text.split("*")) and ('0' not in text.split("*")):
-        #     save = text.split('*')
-        #     print(save)
-        #
-        #     this layer ensures that the phone number is correct, else error
-            # if len(text.split("*")[2]) == 11:
-            #     response = second_menu()
-            # else:
-            #     response = "END Thank you!\n"
-            #     response += "You have entered an invalid Entry."
+
 
         elif len(text.split('*')) == 4 and text.split('*')[0] == '1' and ('00' not in text.split("*")):
             save = text.split('*')
